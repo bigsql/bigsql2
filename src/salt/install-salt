@@ -1,0 +1,30 @@
+
+pip3 --version 2>/dev/null
+rc=$?
+if [ "$rc" == "0" ]; then
+  PIP=pip3
+  PYTHON=python3
+else
+  PIP=pip
+  PYTHON=python
+fi
+
+PIP_VER=`$PIP --version`
+rc=$?
+if [ ! "$rc" == "0" ]; then
+  sudo yum install -y python-pip
+  PIP_VER=`$PIP --version`
+fi
+
+echo "PIPVER = $PIP_VER"
+
+sudo yum install -y $PYTHON-setuptools $PYTHON-devel awscli 
+
+sudo yum install -y gcc 
+
+sudo $PIP install salt
+rc=$?
+
+echo "rc=$rc"
+exit $rc
+
