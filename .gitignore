@@ -1,0 +1,11 @@
+out/
+pgcli/
+lmm/local/node1
+lmm/local/node2
+lmm/lmm
+lmm/remote/etcd/default.etcd
+lmm/pglogical
+pgbin/pg/src
+pgbin/pg/1*
+pgbin/pg/9*
+
