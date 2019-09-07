@@ -1,0 +1,2 @@
+2019-09-07 05:07:30 [COMMAND] : pgc set GLOBAL REPO http://localhost:8000
+2019-09-07 05:07:38 [COMMAND] : pgc info
