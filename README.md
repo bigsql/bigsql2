@@ -1,4 +1,4 @@
-# README for BIGSQL #
+# README for BIGSQL2 #
 
 Recipe for the "Postgres by BigSQL" distro http://bigsql.org
 
@@ -22,17 +22,17 @@ mkdir ~/pgc
 mkdir ~/pgc/in
 mkdir ~/pgc/out
 
-# pull in from git the BIGSQL project & then PGCLI underneath it
+# pull in from git the BIGSQL2 project & then PGC underneath it
 cd ~/pgc
-git clone https://github.com/bigsql/bigsql.git 
+git clone https://github.com/bigsql/bigsql2  
 cd bigsql
-git clone https://github.com/bigsql/pgcli
+git clone https://github.com/bigsql/cli2
 
 # edit your ~/.bashrc to set required IN & OUT env variables
 export IN=$HOME/pgc/in
 export OUT=$HOME/pgc/out
-export PGC=$HOME/pgc/bigsql
-export CLI=$PGC/pgcli/scripts
+export PGC=$HOME/pgc/bigsql2
+export CLI=$PGC/cli2/scripts
 export REPO=http://localhost:8000
 
 ## Steps to make new components ######################################
