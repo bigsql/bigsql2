@@ -12,9 +12,9 @@ pg11V="11.5"
 pg11BuildV=1
 
 ## these are built w/ pgbin-linux.sh command line options"
-bouncerV="1.9.0"
+bouncerV="1.11.0"
 odbcV="11.01.0000"
-backrestV="2.16"
+backrestV="2.17"
 
 ## BDR Experimental
 pg94V=9.4.20
