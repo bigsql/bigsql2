@@ -3,7 +3,7 @@ sudo yum -y update
 
 sudo yum -y groupinstall 'Development Tools'
 
-$YUM="sudo yum -y install"
+YUM="sudo yum -y install"
 
 $YUM bison-devel readline-devel zlib-devel openssl-devel
 $YUM libxml2-devel libxslt-devel wget openjade 
