@@ -1,28 +1,17 @@
 
-pip3 --version 2>/dev/null
+python3 --version 2>/dev/null
 rc=$?
 if [ "$rc" == "0" ]; then
-  PIP=pip3
   PYTHON=python3
 else
-  PIP=pip
   PYTHON=python
 fi
 
-PIP_VER=`$PIP --version`
-rc=$?
-if [ ! "$rc" == "0" ]; then
-  sudo yum install -y python-pip
-  PIP_VER=`$PIP --version`
-fi
+sudo yum install -y $PYTHON-setuptools $PYTHON-devel gcc
 
-echo "PIPVER = $PIP_VER"
+sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
 
-sudo yum install -y $PYTHON-setuptools $PYTHON-devel awscli 
-
-sudo yum install -y gcc 
-
-sudo $PIP install salt
+sudo yum install -y awscli salt-master salt-minion salt-ssh salt-syndic salt-cloud
 rc=$?
 
 echo "rc=$rc"

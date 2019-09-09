@@ -14,6 +14,7 @@ profV=4.1-1
 cstarV=3.1.4-1
 athenafdwV=3.1-2
 saltV=2019pp
+pipV=19pp
 
 HUB="$PWD"
 SRC="$HUB/src"

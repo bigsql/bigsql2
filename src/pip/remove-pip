@@ -8,6 +8,6 @@ else
   PYTHON=python
 fi
 
-sudo yum install -y $PYTHON-pip
+sudo yum remove -y $PYTHON-pip
 
 exit 0

@@ -26,9 +26,11 @@ printUsageMessage () {
   echo "#---------------------------------------------------#"
   echo "# -p  $P11  c*fdw-$cstarV  timescale-$timescaleV"
   echo "#    athenafdw-$athenafdwV  prflr-$profV"
+  echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
   echo "#---------------------------------------------------#"
-  echo "# ./build.sh -X l64 -c $bundle -N $P11 -p 11 -b"
+  echo "# ./build.sh -X l64 -c $bundle -N $P11 -p 11 -Bb"
+  echo "# ./build.sh -X l64 -c $bundle -N $P12 -p 12 -Bb"
   echo "#---------------------------------------------------#"
 }
 
@@ -423,6 +425,7 @@ do
           fi;;
 
       B) initC "salt" "saltstack" "$saltV" "$plat" "salt" "" "" "nil" 
+         initC "pip"  "pip"       "$pipV"  "$plat" "pip"  "" "" "nil" 
          ;;
 
       R)  writeSettRow "GLOBAL" "REPO" "$repo" "-v";;

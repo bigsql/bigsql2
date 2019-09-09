@@ -19,6 +19,7 @@ INSERT INTO categories VALUES (0, 'Hidden');
 INSERT INTO categories VALUES (1, 'PostgreSQL');
 INSERT INTO categories VALUES (2, 'Extensions');
 INSERT INTO categories VALUES (3, 'Servers');
+INSERT INTO categories VALUES (4, 'Applications');
 
 
 CREATE TABLE projects (
@@ -41,6 +42,7 @@ INSERT INTO projects VALUES ('athena_fdw', 2, 0, 'hub', 0, 'https://github.com/b
 INSERT INTO projects VALUES ('timescaledb', 2, 0, 'hub', 0, 'https://github.com/bigsql/apache_timescaledb', 'Timeseries Extension');
 INSERT INTO projects VALUES ('pglogical', 2, 0, 'hub', 0, 'https://github.com/2ndQuadrant/pglogical', 'Logical Replication');
 
+INSERT INTO projects VALUES ('pip',  4,    0, 'hub', 0, '',                                  '');
 INSERT INTO projects VALUES ('salt', 3, 4505, 'hub', 0, 'https://github.com/saltstack/salt', 'Cluster Mgmt in the Cloud');
 
 
@@ -71,6 +73,7 @@ INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFD
 
 INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'test');
 
+INSERT INTO releases VALUES ('pip',  'pip',   '', '', '', '', 'test');
 INSERT INTO releases VALUES ('salt', 'salt',  '', '', '', '', 'test');
 
 
@@ -101,5 +104,7 @@ INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 1, '201
 
 INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 1, '20190708', 'pg11');
 
-INSERT INTO versions VALUES ('salt', '2019pp', 'linux64', 1, '20190904', '');
+INSERT INTO versions VALUES ('salt', '2019pp', 'linux64', 1, '20190912', '');
+
+INSERT INTO versions VALUES ('pip', '19pp', 'linux64', 1, '20190912', '');
 
