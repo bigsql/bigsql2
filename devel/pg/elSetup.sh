@@ -11,6 +11,6 @@ $YUM pam-devel openldap-devel uuid-devel
 
 $YUM llvm-devel clang-devel protobuf-c-devel 
 
-$YUM docbook-dtds docbook-style-dsssl docbook-style-xsl
-$YUM perl-ExtUtils-Embed libevent-devel postgresql-devel mkdocs highlight
+$YUM docbook-dtds docbook-style-dsssl docbook-style-xsl mkdocs highlight
+$YUM perl-ExtUtils-Embed libevent-devel tcl-devel postgresql-devel
 
