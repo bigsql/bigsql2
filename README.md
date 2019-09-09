@@ -8,9 +8,11 @@ sudo yum install -y net-tools zip unix2dos wget git python-setuptools bzip2 pbzi
 
 sudo pip install --upgrade pip
 sudo pip install pssh
+sudo pip3 install --upgrade pip
 
+cd ~
 ssh-keygen -t rsa
-cd ~/.ssh
+cd .ssh
 cat id_rsa.pub
 < paste into authorized_keys of remote server >
 ```
