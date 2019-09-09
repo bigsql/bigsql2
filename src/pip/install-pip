@@ -1,0 +1,30 @@
+
+python3 --version 2>/dev/null
+rc=$?
+if [ "$rc" == "0" ]; then
+  PIP=pip3
+  PYTHON=python3
+else
+  PIP=pip
+  PYTHON=python
+fi
+
+PIP_VER=`$PIP --version`
+rc=$?
+if [ ! "$rc" == "0" ]; then
+  sudo yum install -y python-pip
+  rc=$?
+  PIP_VER=`$PIP --version`
+fi
+
+## pip for python2 throws lots of deprecation warnings if u try
+##  and upgrade it to the latest version, so...  leave the OS version
+##  in that case.
+if [ $PYTHON == "python3" ]; then
+  pip3 install --upgrade pip --user
+  rc=$?
+fi
+
+echo "PIPVER = $PIP_VER"
+
+exit $rc
