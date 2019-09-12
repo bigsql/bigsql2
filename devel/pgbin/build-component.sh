@@ -1193,12 +1193,12 @@ function buildPGHintPlanComponent {
 
 function buildTimeScaleDBComponent {
 
-        componentName="apache_timescaledb-pg$pgShortVersion-$timescaledbFullVersion-$timescaledbBuildV-$buildOS"
+        componentName="timescaledb-pg$pgShortVersion-$timescaledbFullVersion-$timescaledbBuildV-$buildOS"
         mkdir -p "$baseDir/$workDir/logs"
         cd "$baseDir/$workDir"
         pwd
-        mkdir apache_timescaledb && tar -xf $timescaleDBSource --strip-components=1 -C apache_timescaledb
-        cd apache_timescaledb
+        mkdir timescaledb && tar -xf $timescaleDBSource --strip-components=1 -C timescaledb
+        cd timescaledb
 
         echo "buildLocation=$baseDir/$workDir/build/$componentName"
         buildLocation="$baseDir/$workDir/build/$componentName"
@@ -1208,17 +1208,17 @@ function buildTimeScaleDBComponent {
 
         PATH=/opt/pgbin-build/pgbin/bin:$buildLocation/bin:$PATH
 
-	./bootstrap -DAPACHE_ONLY=1 > $baseDir/$workDir/logs/apache_timescaledb_bootstrap.log 2>&1
+	./bootstrap -DAPACHE_ONLY=1 > $baseDir/$workDir/logs/timescaledb_bootstrap.log 2>&1
 
 	cd build
-        USE_PGXS=1 make -d > $baseDir/$workDir/logs/apache_timescaledb_make.log 2>&1
+        USE_PGXS=1 make -d > $baseDir/$workDir/logs/timescaledb_make.log 2>&1
         if [[ $? -eq 0 ]]; then
-                 USE_PGXS=1 make install > $baseDir/$workDir/logs/apache_timescaledb_install.log 2>&1
+                 USE_PGXS=1 make install > $baseDir/$workDir/logs/timescaledb_install.log 2>&1
                 if [[ $? -ne 0 ]]; then
-                        echo "apache_timescaledb install failed, check logs for details."
+                        echo "timescaledb install failed, check logs for details."
                 fi
         else
-                echo "apache_timescaledb Make failed, check logs for details."
+                echo "timescaledb Make failed, check logs for details."
                 return 1
         fi
 

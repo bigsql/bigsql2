@@ -5,7 +5,7 @@
 
 pgcServer="192.168.11.139"
 
-pg12V="12beta3"
+pg12V="12beta4"
 pg12BuildV=1
 
 pg11V="11.5"
@@ -138,7 +138,7 @@ hintplanFullVersion=1.3.2
 hintplanShortVersion=
 hintplanBuildV=1
 
-timescaledbFullVersion=1.4.1
+timescaledbFullVersion=1.4.2
 timescaledbShortVersion=
 timescaledbBuildV=1
 

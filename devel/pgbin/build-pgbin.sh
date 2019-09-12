@@ -113,7 +113,7 @@ function checkBackrest {
 	mkdir -p $workDir
 	cd $baseDir/$workDir
 
-	backrestSourceDir="backrest-2.15.1/src"
+	backrestSourceDir=`dirname $(tar -tf $backrestTar | grep Makefile.in)`
 
 	tar -xf $backrestTar
 
@@ -138,7 +138,7 @@ function checkBouncer {
 
 	cd $pgBouncerSourceDir
 
-	isBouncerConf=`./configure --version | head -1 | grep "pgbouncer configure" | wc -l`
+	isBouncerConf=`./configure --version | head -1 | grep -i "pgbouncer configure" | wc -l`
 
 	if [[ $isBouncerConf -ne 1 ]]; then
 		echo "$pgbouncerTar is not a valid PGBouncer source tarball .... "
@@ -577,8 +577,10 @@ while getopts "t:a:b:k:o:n:h" opt; do
 				continue
 			fi
 			backrestTar=$OPTARG
-			buildBackrest=1
-			echo "# -k $backrestTar"
+			## buildBackrest=1
+			## echo "# -k $backrestTar"
+			buildBackrest=0
+			echo "# -k $backrestTar (IGNORING THIS FOR NOW)"
 		;;
 		o) 	if [[ OPTARG = -* ]]; then
 				((OPTIND--))
