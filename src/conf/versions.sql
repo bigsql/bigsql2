@@ -61,7 +61,7 @@ INSERT INTO releases VALUES ('hub', 'hub', 'Hidden', 'Hidden', '',  '', 'prod');
 
 INSERT INTO releases VALUES ('pg11', 'pg', 'PostgreSQL 11',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/11/', 'prod');
 
-INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'prod');
+INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'test');
 
 INSERT INTO releases VALUES ('pglogical2-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
@@ -88,11 +88,12 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '4.3.0', '', 1, '20190904', '');
+INSERT INTO versions VALUES ('hub', '4.3.1', '', 1, '20190912', '');
+INSERT INTO versions VALUES ('hub', '4.3.0', '', 0, '20190904', '');
 
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
-INSERT INTO versions VALUES ('pg12', '12beta3', 'alpine64', 1, '20190912', '');
+INSERT INTO versions VALUES ('pg12', '12beta4-1', 'linux64', 1, '20190912', '');
 
 INSERT INTO versions VALUES ('pglogical2-pg11', '2.2-1',  'linux64', 1, '20190904', 'pg11');
 
