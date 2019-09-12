@@ -7,7 +7,7 @@ hubV=4.3.0
 P11=11.5-1
 P12=12beta4-1
 
-timescaleV=1.4.1-1
+timescaleV=1.4.2-1
 logicalV=2.2-1
 
 profV=4.1-1
