@@ -24,7 +24,7 @@ fi
 
 printUsageMessage () {
   echo "#---------------------------------------------------#"
-  echo "# -p  $P11  c*fdw-$cstarV  timescale-$timescaleV"
+  echo "# -p  $P11  $P12 c*fdw-$cstarV  timescale-$timescaleV"
   echo "#    athenafdw-$athenafdwV  prflr-$profV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
@@ -360,6 +360,8 @@ initC () {
 initPG () {
   pgMd="11"
   pgV=$P11
+  ##pgMd="12"
+  ##pgV=$P12
 
   initDir "pg$pgM" "pg" "$pgV" "$plat" "postgres/pg$pgM" "Enabled" "5432" "nil"
   supplementalPG "pg$pgM"
@@ -367,12 +369,14 @@ initPG () {
 
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
- 
-  initC "timescaledb-pg$pgM" "_timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
-  initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
-  initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
-  initC "pglogical2-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/pglogical" "" "" "nil"
-  initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
+
+  if [ "$pgMd" == "11" ]; then 
+    initC "timescaledb-pg$pgM" "_timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
+    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
+    initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
+    initC "pglogical2-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/pglogical" "" "" "nil"
+    initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
+  fi
 }
 
 

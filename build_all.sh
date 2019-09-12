@@ -37,15 +37,18 @@ buildONE () {
 }
 
 is11=true
+is12=true
 
 echo "############### Build Package Managers ##################"
 rm -f $OUT/hub-$hubV*
 rm -f $OUT/bigsql-pgc-$hubV*
 ./build.sh -X posix   -c bigsql-pgc -N $hubV
 
-if [ "$is11" == "true" ]; then
-  buildALL 11 $P11
-fi;
+##if [ "$is11" == "true" ]; then
+buildALL 11 $P11
+##fi;
+
+##buildALL 12 $P12
 
 echo ""
 exit 0
