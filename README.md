@@ -45,6 +45,8 @@ export HIST=$DEV/pgc_history
 export IN=$DEV/in
 export OUT=$DEV/out
 
+export NIMOY=$DEV/nimoy
+export RMT=$NIMOY/remote
 
 export PGC=$DEV/bigsql2
 export DEVEL=$PGC/devel
@@ -62,7 +64,6 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 export ANT_HOME=$HOME/apache-ant-1.9.14
 export PATH=$ANT_HOME/bin:$PATH
-
 
 ## Steps to make new components ######################################
 
