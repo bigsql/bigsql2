@@ -47,8 +47,9 @@ export OUT=$DEV/out
 
 
 export PGC=$DEV/bigsql2
-
-export PGBIN=$PGC/devel/pgbin
+export DEVEL=$PGC/devel
+export PG=$DEVEL/pg
+export PGBIN=$DEVEL/pgbin
 export SRC=$PGBIN/sources
 export BLD=$PGBIN/build
 
