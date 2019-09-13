@@ -7,6 +7,16 @@ if [ ! "$rc" == "0" ]; then
   exit 1
 fi;
 
+majorV="$1"
+if [ "$majorV" == "11" ]; then
+  minorV=$P11
+elif [ "$majorV" == "12" ]; then
+  minorV=$P12
+else
+  echo "ERROR: must supply pg version of 11 or 12"
+  exit 1
+fi
+
 
 buildALL () {
   bigV=$1
@@ -36,19 +46,13 @@ buildONE () {
   fi
 }
 
-is11=true
-is12=true
 
 echo "############### Build Package Managers ##################"
 rm -f $OUT/hub-$hubV*
 rm -f $OUT/bigsql-pgc-$hubV*
 ./build.sh -X posix   -c bigsql-pgc -N $hubV
 
-##if [ "$is11" == "true" ]; then
-buildALL 11 $P11
-##fi;
-
-##buildALL 12 $P12
+buildALL $majorV $minorV
 
 echo ""
 exit 0

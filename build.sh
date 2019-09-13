@@ -358,10 +358,11 @@ initC () {
 
 
 initPG () {
-  pgMd="11"
-  pgV=$P11
-  ##pgMd="12"
-  ##pgV=$P12
+  if [ "$pgM" == "11" ]; then
+    pgV=$P11
+  else
+    pgV=$P12
+  fi
 
   initDir "pg$pgM" "pg" "$pgV" "$plat" "postgres/pg$pgM" "Enabled" "5432" "nil"
   supplementalPG "pg$pgM"
