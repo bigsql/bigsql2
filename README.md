@@ -31,6 +31,7 @@ cat id_rsa.pub
 mkdir ~/dev
 mkdir ~/dev/in
 mkdir ~/dev/out
+mkdir ~/dev/pgc_history
 
 # pull in from git the BIGSQL2 project & then PGC underneath it
 cd ~/dev
@@ -40,12 +41,17 @@ git clone https://github.com/bigsql/cli2
 
 # edit your ~/.bashrc to set env variables
 export DEV=$HOME/dev
-export PG=$DEV/pg
-
 export HIST=$DEV/pgc_history
 export IN=$DEV/in
 export OUT=$DEV/out
+
+
 export PGC=$DEV/bigsql2
+
+export PGBIN=$PGC/devel/pgbin
+export SRC=$PGBIN/sources
+export BLD=$PGBIN/build
+
 export CLI=$PGC/cli2/scripts
 export PSX=$PGC/out/posix
 export REPO=http://localhost:8000
