@@ -371,8 +371,8 @@ initPG () {
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
 
-  if [ "$pgMd" == "11" ]; then 
-    initC "timescaledb-pg$pgM" "_timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
+  if [ "$pgM" == "11" ]; then 
+    initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
     initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
     initC "pglogical2-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/pglogical" "" "" "nil"
