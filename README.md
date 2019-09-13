@@ -2,18 +2,22 @@
 
 Recipe for the "Postgres by BigSQL" distro http://bigsql.org
 
-## Pre-reqs #################################################
+## Pre-reqs for CentOS 7  & Python 3.7 #######################
 ```
 
 sudo yum install -y net-tools zip unix2dos wget git bzip2 pbzip2 
 sudo yum install -y awscli java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server
 
-cd ~
+sudo yum install gcc openssl-devel bzip2-devel libffi libffi-devel
+wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
+tar -xzf Python-3.7.4.tgz 
+cd Python-3.7.4/
+sudo ./configure --enable-optimizations
+sudo make install
+pip3 install --upgrade pip --user
+pip3 install pssh --user
 
-wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-sudo rpm -ivh epel-release-latest-7.noarch.rpm
-sudo yum install -y python-setuptools python-pip
-sudo pip install pssh
+cd ~
 
 ssh-keygen -t rsa
 cd .ssh
