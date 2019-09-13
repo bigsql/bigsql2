@@ -1,6 +1,5 @@
 out/
 cli2/
-pgbin/pg/src
-pgbin/pg/1*
-pgbin/pg/9*
-
+devel/pg/src
+devel/pg/1*
+devel/pg/9*
