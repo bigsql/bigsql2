@@ -1,24 +1,33 @@
-# README for BIGSQL2 #
+# README for BIGSQL2 ( http://bigsql.org ) #
 
-Recipe for the "Postgres by BigSQL" distro http://bigsql.org
+Recipe for making the "Postgres by BigSQL" distro.
 
-## Pre-reqs for CentOS 7  & Python 3.7 #######################
+## Pre-reqs for CentOS 7 w/ Python 3.7 #######################
 ```
+sudo yum update -y
+sudo yum install -y git net-tools zip unix2dos wget bzip2 pbzip2 openssh-server
 
-sudo yum install -y net-tools zip unix2dos wget git bzip2 pbzip2 
-sudo yum install -y awscli java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server
+sudo yum install -y epel-release
+sudo yum install -y awscli
 
-sudo yum install gcc openssl-devel bzip2-devel libffi libffi-devel
+sudo yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server
+ANT=apache-ant-1.9.14-bin.tar.gz
+cd ~
+wget http://mirror.reverse.net/pub/apache/ant/binaries/$ANT
+tar -xvf $ANT
+rm $ANT
+
+sudo yum install -y gcc openssl-devel bzip2-devel libffi libffi-devel
 wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
 tar -xzf Python-3.7.4.tgz 
 cd Python-3.7.4/
 sudo ./configure --enable-optimizations
 sudo make install
+
 pip3 install --upgrade pip --user
 pip3 install pssh --user
 
 cd ~
-
 ssh-keygen -t rsa
 cd .ssh
 cat id_rsa.pub
@@ -60,10 +69,8 @@ export PSX=$PGC/out/posix
 export REPO=http://localhost:8000
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
-export PATH=$PATH:$JAVA_HOME/bin
-
-export ANT_HOME=$HOME/apache-ant-1.9.14
-export PATH=$ANT_HOME/bin:$PATH
+export ANT_HOME=~/apache-ant-1.9.14
+export PATH=$PATH:$JAVA_HOME/bin:$ANT_HOME/bin
 
 ## Steps to make new components ######################################
 

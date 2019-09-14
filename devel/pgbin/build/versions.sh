@@ -1,6 +1,4 @@
 #!/bin/bash
-# Set pgBin Versions.
-# Set component versions and their build versions.
 # Set build version for pgBin and components.
 
 pgcServer="192.168.11.139"
@@ -10,6 +8,9 @@ pg12BuildV=1
 
 pg11V="11.5"
 pg11BuildV=1
+
+pg10V="10.10"
+pg10BuildV=1
 
 ## these are built w/ pgbin-linux.sh command line options"
 bouncerV="1.11.0"
