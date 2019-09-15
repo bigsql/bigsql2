@@ -204,9 +204,9 @@ function buildPostgres {
 		exit 1
 	fi
 
-	echo "#    make"
+	echo "#    make -j 5"
 	log=$baseDir/$workDir/logs/make.log
-	make > $log 2>&1
+	make -j 5 > $log 2>&1
 	if [[ $? -ne 0 ]]; then
 		echo "# make failed, check $log"
 		exit 1
@@ -221,8 +221,8 @@ function buildPostgres {
  	fi
 
 	cd $baseDir/$workDir/$pgSrcDir/contrib
-	echo "#    make contrib"
-	make > $baseDir/$workDir/logs/contrib_make.log 2>&1
+	echo "#    make -j 5 contrib"
+	make -j5 > $baseDir/$workDir/logs/contrib_make.log 2>&1
 	if [[ $? -eq 0 ]]; then
 		echo "#    make install contrib"
 		make install > $baseDir/$workDir/logs/contrib_install.log 2>&1
@@ -236,7 +236,7 @@ function buildPostgres {
 			cd bdr
 			./autogen.sh
 			./configure
-			make -j4 -s all
+			make -j5 -s all
 			make -s install
 		fi
 	fi
@@ -391,7 +391,6 @@ function copySharedLibs {
 	cp $sharedLibs/libkrb5support.so $buildLocation/lib/
 	cp $sharedLibs/libkrb5.so.3 $buildLocation/lib/
 	cp $sharedLibs/libcom_err.so.3 $buildLocation/lib/
-	cp $sharedLibs/libgss.so* $buildLocation/lib/
 	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
 	cp $sharedLibs/libxslt.so.1 $buildLocation/lib/
 	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
@@ -399,34 +398,35 @@ function copySharedLibs {
 	cp $sharedLibs/libldap_r-2.4.so.2 $buildLocation/lib/
 	cp $sharedLibs/liblber-2.4.so.2 $buildLocation/lib/
 	cp $sharedLibs/libsasl2.so.3 $buildLocation/lib/
-	#cp $xml2Lib/lib/libxml2.so* $buildLocation/lib/
+	cp $sharedLibs/libxml2.so* $buildLocation/lib/
 	chmod 755 $buildLocation/lib/libuuid.so.16
-
-	if [[ $buildPgBouncer -eq 1 ]]; then
-		cp $sharedLibs/libevent-2.0.so.5 $buildLocation/lib/
-	fi
+	cp $sharedLibs/libevent-2.0.so.5 $buildLocation/lib/
 }
 
 function updateSharedLibPaths {
-	echo "# updateSharedLibPaths() "
+        libPathLog=$baseDir/$workDir/logs/libPath.log
+	echo "# updateSharedLibPaths() @ $libPathLog"
 
 	cd $buildLocation/bin
-
+	echo "## looping thru executables"
 	for file in `dir -d *` ; do
-		chrpath -r "\${ORIGIN}/../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1
+		##echo "### $file"
+		chrpath -r "\${ORIGIN}/../lib" "$file" >> $libPathLog 2>&1
 	done
 
 	cd $buildLocation/lib
-	
+	echo "## looping thru shared objects"
 	for file in `dir -d *so*` ; do
-		chrpath -r "\${ORIGIN}/../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1 
+		##echo "### $file"
+		chrpath -r "\${ORIGIN}/../lib" "$file" >> $libPathLog 2>&1 
 	done
 
+	echo "## looping thru lib/postgresql "
 	if [[ -d "$buildLocation/lib/postgresql" ]]; then	
 		cd $buildLocation/lib/postgresql
-
+		##echo "### $file"
         	for file in `dir -d *.so` ; do
-                	chrpath -r "\${ORIGIN}/../../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1
+                	chrpath -r "\${ORIGIN}/../../lib" "$file" >> $libPathLog 2>&1
         	done
 	fi
 	
@@ -628,7 +628,7 @@ fi
 checkCmd "copySharedLibs"
 checkCmd "updateSharedLibPaths"
 checkCmd "createBundle"
-checkCmd "scpToPgcServer"
+##checkCmd "scpToPgcServer"
 
 endTime=`date +%Y-%m-%d_%H:%M:%S`
 echo "### end at $endTime"
