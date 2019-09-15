@@ -61,8 +61,9 @@ export PGC=$DEV/bigsql2
 export DEVEL=$PGC/devel
 export PG=$DEVEL/pg
 export PGBIN=$DEVEL/pgbin
-export SRC=$PGBIN/sources
-export BLD=$PGBIN/build
+
+export SRC=$IN/sources
+export BLD=/opt/pgbin-build/pgbin/bin
 
 export CLI=$PGC/cli2/scripts
 export PSX=$PGC/out/posix
