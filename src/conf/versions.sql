@@ -41,6 +41,7 @@ INSERT INTO projects VALUES ('cassandra_fdw', 2, 0, 'hub', 0, 'http://cassandraf
 INSERT INTO projects VALUES ('athena_fdw', 2, 0, 'hub', 0, 'https://github.com/bigsql/athena_fdw', 'Hive/Athena Foreign Data Wrapper');
 INSERT INTO projects VALUES ('timescaledb', 2, 0, 'hub', 0, 'https://github.com/bigsql/apache_timescaledb', 'Timeseries Extension');
 INSERT INTO projects VALUES ('pglogical', 2, 0, 'hub', 0, 'https://github.com/2ndQuadrant/pglogical', 'Logical Replication');
+INSERT INTO projects VALUES ('pgtsql', 2, 0, 'hub', 0, '', '');
 
 INSERT INTO projects VALUES ('pip',  4,    0, 'hub', 0, '',                                  '');
 INSERT INTO projects VALUES ('salt', 3, 4505, 'hub', 0, 'https://github.com/saltstack/salt', 'Cluster Mgmt in the Cloud');
@@ -62,6 +63,8 @@ INSERT INTO releases VALUES ('hub', 'hub', 'Hidden', 'Hidden', '',  '', 'prod');
 INSERT INTO releases VALUES ('pg10', 'pg', 'PostgreSQL 10',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/10/', 'prod');
 INSERT INTO releases VALUES ('pg11', 'pg', 'PostgreSQL 11',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/11/', 'prod');
 INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'test');
+
+INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'test');
 
 INSERT INTO releases VALUES ('pglogical2-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
@@ -97,6 +100,8 @@ INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20191001', '');
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
 INSERT INTO versions VALUES ('pg12', '12beta4-1', 'linux64', 1, '20190912', '');
+
+INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.1-1',  'linux64', 1, '20191001', 'pg10');
 
 INSERT INTO versions VALUES ('pglogical2-pg11', '2.2-1',  'linux64', 1, '20190904', 'pg11');
 
