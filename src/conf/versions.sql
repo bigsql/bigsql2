@@ -59,8 +59,8 @@ CREATE TABLE releases (
 );
 INSERT INTO releases VALUES ('hub', 'hub', 'Hidden', 'Hidden', '',  '', 'prod');
 
+INSERT INTO releases VALUES ('pg10', 'pg', 'PostgreSQL 10',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/10/', 'prod');
 INSERT INTO releases VALUES ('pg11', 'pg', 'PostgreSQL 11',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/11/', 'prod');
-
 INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'test');
 
 INSERT INTO releases VALUES ('pglogical2-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
@@ -91,6 +91,8 @@ CREATE TABLE versions (
 INSERT INTO versions VALUES ('hub', '4.3.2', '', 1, '20191001', '');
 INSERT INTO versions VALUES ('hub', '4.3.1', '', 0, '20190912', '');
 INSERT INTO versions VALUES ('hub', '4.3.0', '', 0, '20190904', '');
+
+INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20191001', '');
 
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 

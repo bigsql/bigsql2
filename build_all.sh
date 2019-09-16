@@ -8,12 +8,14 @@ if [ ! "$rc" == "0" ]; then
 fi;
 
 majorV="$1"
-if [ "$majorV" == "11" ]; then
+if [ "$majorV" == "10" ]; then
+  minorV=$P10
+elif [ "$majorV" == "11" ]; then
   minorV=$P11
 elif [ "$majorV" == "12" ]; then
   minorV=$P12
 else
-  echo "ERROR: must supply pg version of 11 or 12"
+  echo "ERROR: must supply pg version of 10, 11 or 12"
   exit 1
 fi
 

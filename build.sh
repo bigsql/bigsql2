@@ -23,14 +23,13 @@ fi
 
 
 printUsageMessage () {
-  echo "#---------------------------------------------------#"
-  echo "# -p  $P11  $P12 c*fdw-$cstarV  timescale-$timescaleV"
-  echo "#    athenafdw-$athenafdwV  prflr-$profV"
+  echo "#--------------------------------------------------------#"
+  echo "# -p $P12  $P11  $P10  cassandra_fdw-$cstarV"
+  echo "#    timescale-$timescaleV  athenafdw-$athenafdwV  plprofiler-$profV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
-  echo "#---------------------------------------------------#"
+  echo "#--------------------------------------------------------#"
   echo "# ./build.sh -X l64 -c $bundle -N $P11 -p 11 -Bb"
-  echo "# ./build.sh -X l64 -c $bundle -N $P12 -p 12 -Bb"
   echo "#---------------------------------------------------#"
 }
 
@@ -358,10 +357,15 @@ initC () {
 
 
 initPG () {
-  if [ "$pgM" == "11" ]; then
+  if [ "$pgM" == "10" ]; then
+    pgV=$P10
+  elif [ "$pgM" == "11" ]; then
     pgV=$P11
-  else
+  elif [ "$pgM" == "11" ]; then
     pgV=$P12
+  else
+    echo "ERROR: Invalid PG version '$pgM'"
+    exit 1
   fi
 
   initDir "pg$pgM" "pg" "$pgV" "$plat" "postgres/pg$pgM" "Enabled" "5432" "nil"
