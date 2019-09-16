@@ -6,7 +6,7 @@ sudo yum -y groupinstall 'Development Tools'
 YUM="sudo yum -y install"
 
 $YUM bison-devel readline-devel zlib-devel openssl-devel
-$YUM libxml2-devel libxslt-devel wget openjade 
+$YUM libxml2-devel libxslt-devel sqlite-devel wget openjade 
 $YUM pam-devel openldap-devel uuid-devel 
 
 $YUM llvm-devel clang-devel protobuf-c-devel chrpath
