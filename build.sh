@@ -197,6 +197,7 @@ initDir () {
   copy-pgXX "cassandra_fdw"
   copy-pgXX "athena_fdw"
   copy-pgXX "plprofiler"
+  copy-pgXX "pgtsql"
 
   if [ -f $myNewDir/LICENSE.TXT ]; then
     mv $myNewDir/LICENSE.TXT $myNewDir/$pComponent-LICENSE.TXT
