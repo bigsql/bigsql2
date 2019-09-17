@@ -110,9 +110,9 @@ INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20190826
 INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 1, '20190912', 'pg11');
 INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.1-1', 'linux64', 0, '20190904', 'pg11');
 
-INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 1, '20190808', 'pg11');
+INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '20190808', 'pg11');
 
-INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 1, '20190708', 'pg11');
+INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 0, '20190708', 'pg11');
 
 INSERT INTO versions VALUES ('salt', '2019pp', 'linux64', 1, '20190912', '');
 

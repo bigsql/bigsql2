@@ -1,13 +1,13 @@
-cur_dir=`pwd`
 
-cd $OUT
-pyver=`python --version  > /dev/null 2>&1`
+pyver=`python3 --version  > /dev/null 2>&1`
 rc=$?
-echo rc=$rc
-if [ $rc == 0 ];then
-  python -m SimpleHTTPServer &
+if [ "$rc" == "0" ];then
+  cmd="python3 -m http.server"
 else
-  python3 -m http.server &
+  cmd="python -m SimpleHTTPServer"
 fi
 
-cd $cur_dir
+echo $cmd
+cd $OUT
+$cmd &
+
