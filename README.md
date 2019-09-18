@@ -42,11 +42,11 @@ mkdir ~/dev/in
 mkdir ~/dev/out
 mkdir ~/dev/pgc_history
 
-# pull in from git the BIGSQL2 project & then PGC underneath it
+# pull in from git the BIGSQL2 project & then APG underneath it
 cd ~/dev
 git clone https://github.com/bigsql/bigsql2  
 cd bigsql
-git clone https://github.com/bigsql/cli2
+git clone https://github.com/bigsql/apg
 
 # edit your ~/.bashrc to set env variables
 export DEV=$HOME/dev
@@ -65,7 +65,7 @@ export PGBIN=$DEVEL/pgbin
 export SRC=$IN/sources
 export BLD=/opt/pgbin-build/pgbin/bin
 
-export CLI=$PGC/cli2/scripts
+export CLI=$PGC/apg/scripts
 export PSX=$PGC/out/posix
 export REPO=http://localhost:8000
 
