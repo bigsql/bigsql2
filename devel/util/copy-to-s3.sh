@@ -24,7 +24,7 @@ if [ $# -ne 1 ]; then
   exit
 fi
 
-newOutDir=pgc_history/$1
+newOutDir=apg_history/$1
 
 if [ ! -d $newOutDir ]; then
   echo "ERROR: bad dir"

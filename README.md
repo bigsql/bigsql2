@@ -36,11 +36,11 @@ cat id_rsa.pub
 
 ## Setup dev environment ####################################
 ```
-# make the basic PGC directory structure under your $HOME directory
+# make the basic APG directory structure under your $HOME directory
 mkdir ~/dev
 mkdir ~/dev/in
 mkdir ~/dev/out
-mkdir ~/dev/pgc_history
+mkdir ~/dev/apg_history
 
 # pull in from git the BIGSQL2 project & then APG underneath it
 cd ~/dev
@@ -50,23 +50,23 @@ git clone https://github.com/bigsql/apg
 
 # edit your ~/.bashrc to set env variables
 export DEV=$HOME/dev
-export HIST=$DEV/pgc_history
+export HIST=$DEV/apg_history
 export IN=$DEV/in
 export OUT=$DEV/out
 
 export NIMOY=$DEV/nimoy
 export RMT=$NIMOY/remote
 
-export PGC=$DEV/bigsql2
-export DEVEL=$PGC/devel
+export APG=$DEV/bigsql2
+export DEVEL=$APG/devel
 export PG=$DEVEL/pg
 export PGBIN=$DEVEL/pgbin
 
 export SRC=$IN/sources
 export BLD=/opt/pgbin-build/pgbin/bin
 
-export CLI=$PGC/apg/scripts
-export PSX=$PGC/out/posix
+export CLI=$APG/apg/scripts
+export PSX=$APG/out/posix
 export REPO=http://localhost:8000
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk

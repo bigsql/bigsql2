@@ -51,8 +51,8 @@ buildONE () {
 
 echo "############### Build Package Managers ##################"
 rm -f $OUT/hub-$hubV*
-rm -f $OUT/bigsql-pgc-$hubV*
-./build.sh -X posix   -c bigsql-pgc -N $hubV
+rm -f $OUT/bigsql-apg-$hubV*
+./build.sh -X posix   -c bigsql-apg -N $hubV
 
 buildALL $majorV $minorV
 
