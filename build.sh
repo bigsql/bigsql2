@@ -363,7 +363,7 @@ initPG () {
     pgV=$P10
   elif [ "$pgM" == "11" ]; then
     pgV=$P11
-  elif [ "$pgM" == "11" ]; then
+  elif [ "$pgM" == "12" ]; then
     pgV=$P12
   else
     echo "ERROR: Invalid PG version '$pgM'"
