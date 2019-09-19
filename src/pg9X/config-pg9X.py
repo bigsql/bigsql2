@@ -10,11 +10,11 @@ import util, startup
 pgver = "pg9X"
 dotver  = pgver[2] + "." + pgver[3]
 
-PGC_HOME = os.getenv('PGC_HOME', '')
-PGC_LOGS = os.getenv('PGC_LOGS', '')
+APG_HOME = os.getenv('APG_HOME', '')
+APG_LOGS = os.getenv('APG_LOGS', '')
 
-pg_home = os.path.join(PGC_HOME, pgver)
-homedir = os.path.join(PGC_HOME, pgver)
+pg_home = os.path.join(APG_HOME, pgver)
+homedir = os.path.join(APG_HOME, pgver)
 logdir = os.path.join(homedir, pgver)
 
 parser = argparse.ArgumentParser()
@@ -65,7 +65,7 @@ if args.logdir > '':
   util.set_column("logdir", pgver, args.logdir)
 else:
   ## DATA ###############################################
-  data_root = os.path.join(PGC_HOME, "data")
+  data_root = os.path.join(APG_HOME, "data")
   if not os.path.isdir(data_root):
     os.mkdir(data_root)
 
@@ -127,7 +127,7 @@ elif util.get_platform() == "Darwin":
   import plistlib
   if not os.path.isdir(logdir):
     os.mkdir(logdir)
-  plist_conf_dir = os.path.join(PGC_HOME, 'conf', 'plist')
+  plist_conf_dir = os.path.join(APG_HOME, 'conf', 'plist')
   if not os.path.isdir(plist_conf_dir):
     os.mkdir(plist_conf_dir)
   LAUNCHDIR = os.path.join(os.getenv("HOME", "~"), "Library", "LaunchAgents")
@@ -139,9 +139,9 @@ elif util.get_platform() == "Darwin":
   plist_dict['Label'] = "bigsql." + pgver
   plist_dict['Disabled'] = "false"
   plist_dict['EnvironmentVariables'] = {}
-  plist_dict['EnvironmentVariables']['PGC_HOME'] = PGC_HOME
-  plist_dict['EnvironmentVariables']['PGC_LOGS'] = PGC_LOGS
-  plist_dict['EnvironmentVariables']['PYTHONPATH'] = os.path.join(PGC_HOME, "hub", "scripts", "lib")
+  plist_dict['EnvironmentVariables']['APG_HOME'] = APG_HOME
+  plist_dict['EnvironmentVariables']['APG_LOGS'] = APG_LOGS
+  plist_dict['EnvironmentVariables']['PYTHONPATH'] = os.path.join(APG_HOME, "hub", "scripts", "lib")
   program_path = os.path.join(homedir, 'run-pgctl.py')
   plist_dict['ProgramArguments'] = ['python', program_path]
   plist_dict['RunAtLoad'] = True
@@ -198,7 +198,7 @@ elif util.get_platform() == 'Linux':
   if args.autostart == "off":
     startup.remove_linux(systemsvc, start_lvl, kill_lvl)
   else:
-    pg_ctl = os.path.join(PGC_HOME, pgver, 'bin', 'pg_ctl') 
+    pg_ctl = os.path.join(APG_HOME, pgver, 'bin', 'pg_ctl') 
     pgdata = util.get_column('datadir', pgver)
     cmd_start  = pg_ctl + ' start  -D ' + pgdata + ' -s -w -t 300'
     cmd_stop   = pg_ctl + ' stop   -D ' + pgdata + ' -s -m fast'

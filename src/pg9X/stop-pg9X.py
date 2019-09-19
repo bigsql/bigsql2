@@ -8,9 +8,9 @@ from __future__ import print_function, division
 import os, sys, json
 
 
-PGC_HOME = os.getenv("PGC_HOME", "")
-scripts_path = os.path.join(PGC_HOME, 'hub', 'scripts')
-scripts_lib_path = os.path.join(PGC_HOME, 'hub', 'scripts', 'lib')
+APG_HOME = os.getenv("APG_HOME", "")
+scripts_path = os.path.join(APG_HOME, 'hub', 'scripts')
+scripts_lib_path = os.path.join(APG_HOME, 'hub', 'scripts', 'lib')
 
 if scripts_path not in sys.path:
   sys.path.append(scripts_path)
@@ -21,7 +21,7 @@ import util, startup
 
 pgver = "pg9X"
 
-homedir = os.path.join(PGC_HOME, pgver)
+homedir = os.path.join(APG_HOME, pgver)
 
 datadir = util.get_column('datadir', pgver)
 
