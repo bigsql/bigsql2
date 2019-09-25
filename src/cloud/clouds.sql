@@ -32,7 +32,7 @@ CREATE TABLE bigsql.images (
 );
 INSERT INTO bigsql.images VALUES 
   (1, 4, 'Amazon Linux 2 AMI (HVM) - SSD Volume Type',      'ami-04b762b4289fba92b'),
-  (2, 4, 'Ubuntu Server 18.04 LTS (HVM) - SSD Volume Type', 'ami-04b762b4289fba92b');
+  (2, 4, 'Ubuntu Server 18.04 LTS (HVM) - SSD Volume Type', 'ami-06f2f779464715dc5');
 
 
 CREATE TABLE bigsql.zones (
