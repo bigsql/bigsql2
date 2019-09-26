@@ -32,7 +32,7 @@ CREATE TABLE projects (
   short_desc     TEXT    NOT NULL,
   FOREIGN KEY (category) REFERENCES categories(category)
 );
-INSERT INTO projects VALUES ('hub', 0, 0, 'hub', 0, 'http://bigsql.org', 'Pretty Good CLI');
+INSERT INTO projects VALUES ('hub', 0, 0, 'hub', 0, 'http://bigsql.org', 'API for PG (APG)');
 
 INSERT INTO projects VALUES ('pg', 1, 5432, 'hub', 1, 'http://postgresql.org', 'Advanced RDBMS');
 
@@ -62,9 +62,9 @@ INSERT INTO releases VALUES ('hub', 'hub', 'Hidden', 'Hidden', '',  '', 'prod');
 
 INSERT INTO releases VALUES ('pg10', 'pg', 'PostgreSQL 10',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/10/', 'prod');
 INSERT INTO releases VALUES ('pg11', 'pg', 'PostgreSQL 11',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/11/', 'prod');
-INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'test');
+INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'prod');
 
-INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'test');
+INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'prod');
 
 INSERT INTO releases VALUES ('pglogical2-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
@@ -72,9 +72,9 @@ INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Pro
 
 INSERT INTO releases VALUES ('timescaledb-pg11', 'timescaledb', 'TimescaleDB', '', '', '', 'prod');
 
-INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'test');
+INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'prod');
 
-INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'test');
+INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'prod');
 
 INSERT INTO releases VALUES ('pip',  'pip',   '', '', '', '', 'test');
 INSERT INTO releases VALUES ('salt', 'salt',  '', '', '', '', 'test');
@@ -91,9 +91,9 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '5.0.0', '', 1, '20191001', '');
+INSERT INTO versions VALUES ('hub', '5.0.0', '', 1, '20190926', '');
 
-INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20191001', '');
+INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190926', '');
 
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
