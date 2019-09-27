@@ -2,30 +2,22 @@
 
 Recipe for making the "Postgres by BigSQL" distro.
 
-## Pre-reqs for CentOS 7 w/ Python 3.7 #######################
+## Pre-reqs for CentOS 8 #####################################
 ```
 sudo yum update -y
-sudo yum install -y git net-tools zip unix2dos wget bzip2 pbzip2 openssh-server
+sudo yum install -y git python3
+sudo yum install -y net-tools zip unix2dos wget bzip2
 
 sudo yum install -y epel-release
-sudo yum install -y awscli
 
-sudo yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel openssh-server
+sudo yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
 ANT=apache-ant-1.9.14-bin.tar.gz
 cd ~
 wget http://mirror.reverse.net/pub/apache/ant/binaries/$ANT
 tar -xvf $ANT
 rm $ANT
 
-sudo yum install -y gcc openssl-devel bzip2-devel libffi libffi-devel
-wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
-tar -xzf Python-3.7.4.tgz 
-cd Python-3.7.4/
-sudo ./configure --enable-optimizations
-sudo make install
-
-pip3 install --upgrade pip --user
-pip3 install pssh --user
+sudo pip3 install awscli pssh
 
 cd ~
 ssh-keygen -t rsa
