@@ -3,7 +3,7 @@ copyToS3 () {
   bucket="$2"
   exclude="$3"
 
-  flags="--acl public-read --storage-class REDUCED_REDUNDANCY --recursive"
+  flags="--acl public-read --storage-class STANDARD --recursive"
 
   cmd="aws --region $region s3 cp . s3://$bucket $flags"
 
@@ -33,19 +33,7 @@ fi
 
 cd $newOutDir
 
-if [ -d packages ]; then
-  echo "Packages directory found"
-  cd packages
-  ls -l
-  # copyToS3 "us-east-1" "oscg_download/packages" ""
-  cd ..
-  #exit 0
-else
-  echo "Packages directory not found"
-  echo ""
-fi
-
-copyToS3 "us-east-1" "pgcentral" "packages"
+copyToS3 "us-west-2" "bigsql-download/REPO" ""
 
 exit 0
 

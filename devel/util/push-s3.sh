@@ -1,5 +1,5 @@
 
-cmd="aws --region us-east-1 s3 sync . s3://bigsql"
+cmd="aws s3 sync . s3://bigsql-download/IN"
 
 $cmd $1
 rc=$?

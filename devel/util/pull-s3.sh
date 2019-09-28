@@ -1,1 +1,1 @@
-aws --region us-east-1 s3 sync s3://bigsql . $1
+aws s3 sync s3://bigsql-download/IN . $1
