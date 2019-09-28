@@ -1,7 +1,7 @@
 v96=9.6.15
 v10=10.10
 v11=11.5
-v12=12beta3
+v12=12rc1
 
 fatalError () {
   echo "FATAL ERROR!  $1"
@@ -53,8 +53,16 @@ downBuild () {
 #################################################################################
 ##                        MAINLINE
 #################################################################################
-#downBuild $v96
-#downBuild $v10
-downBuild $v11
-#downBuild $v12
+if [ "$1" == "9.6" ]; then
+  downBuild $v96
+elif [ "$1" == "10" ]; then
+  downBuild $v10
+elif [ "$1" == "11" ]; then
+  downBuild $v11
+elif [ "$1" == "12" ]; then
+  downBuild $v12
+else
+  echo "ERROR: Incorrect Pg version paramater"
+  exit 1
+fi
  
