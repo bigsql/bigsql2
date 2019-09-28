@@ -48,9 +48,6 @@ else
   exit 1
 fi
 
-##update sharedLibs with latest from OS ###################
-sudo yum update -y
-
 shared_lib=/opt/pgbin-build/pgbin/shared/linux_64/lib/
 mkdir -p $shared_lib
 
@@ -74,16 +71,18 @@ cp /usr/lib64/libxml2.so.2.9.1      $shared_lib/libxml2.so
 cp /usr/lib64/libevent-2.0.so.5.1.9 $shared_lib/libevent-2.0.so.5
 
 majorV="$1"
-if [ "$majorV" == "11" ]; then
+if [ "$majorV" == "10" ]; then
+  minorV=$P10
+elif [ "$majorV" == "11" ]; then
   minorV=$P11
 elif [ "$majorV" == "12" ]; then
   minorV=$P12
 else
-  echo "ERROR: must supply pg version of 11 or 12"
+  echo "ERROR: must supply pg version of 10, 11 or 12"
   exit 1
 fi
 echo "###  build-all-pgbin.sh"
-runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV.tar.gz"
+runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
 
 # BDR
 #runPgBin "$binBld" "$pgSrc-$pg94V.$tgz" "$pg94BuildV"
