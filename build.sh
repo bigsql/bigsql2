@@ -384,9 +384,9 @@ initPG () {
   if [ "$pgM" == "11" ]; then 
     initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
-    initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
+    ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
     initC "pglogical2-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/pglogical" "" "" "nil"
-    initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
+    ##initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
   fi
 }
 
