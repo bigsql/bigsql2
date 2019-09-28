@@ -91,7 +91,7 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '4.3.1', '', 1, '20190912', '');
+INSERT INTO versions VALUES ('hub', '5.0.0', '', 1, '20191003', '');
 
 INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190926', '');
 
@@ -99,14 +99,13 @@ INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
 INSERT INTO versions VALUES ('pg12', '12rc1-1', 'linux64', 1, '20190926', '');
 
-INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.1-1',  'linux64', 1, '20190926', 'pg10');
+INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003', 'pg10');
 
 INSERT INTO versions VALUES ('pglogical2-pg11', '2.2-1',  'linux64', 1, '20190904', 'pg11');
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20190826', 'pg11');
 
 INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 1, '20190912', 'pg11');
-INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.1-1', 'linux64', 0, '20190904', 'pg11');
 
 INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '20190808', 'pg11');
 

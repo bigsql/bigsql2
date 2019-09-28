@@ -115,8 +115,8 @@ plV8FullVersion=1.4.8
 plV8ShortVersion=14
 plV8BuildV=1
 
-pgTSQLFullVersion=9.5
-pgTSQLShortVersion=9
+pgTSQLFullVersion=2.0.2
+pgTSQLShortVersion=
 pgTSQLBuildV=1
 
 bulkLoadFullVersion=3.1.15
