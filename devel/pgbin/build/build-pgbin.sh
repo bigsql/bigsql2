@@ -88,7 +88,7 @@ function checkPostgres {
 		exit 1
 	else
 		pgSrcV=`$pgSrcDir/configure --version | head -1 | awk '{print $3}'`
-		if [[ "${pgSrcV/rc}" =~ ^12beta* ]]; then
+		if [[ "${pgSrcV/rc}" =~ ^12rc* ]]; then
 			pgShortV="12"
 			pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^11.* ]]; then
@@ -183,8 +183,10 @@ function buildPostgres {
 	echo "#    configure @ $buildLocation"
 
 	conf="./configure --prefix=$buildLocation" 
-	conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
-	conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
+	##conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
+	conf="$conf --with-openssl --with-libxslt --with-libxml"
+	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
+	conf="$conf --with-uuid=ossp --with-python --with-perl"
 	conf="$conf --with-tcl --with-pam"
 	
 	if [ $pgShortV == "11" ] || [ $pgShortV == "12" ]; then

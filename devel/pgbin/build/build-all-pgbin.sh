@@ -61,6 +61,7 @@ cp /usr/lib64/libkrb5support.so.0.1 $shared_lib/libkrb5support.so.0
 cp /usr/lib64/libkrb5.so.3          $shared_lib/.
 cp /usr/lib64/libcom_err.so.2.1     $shared_lib/libcom_err.so.3
 cp /usr/lib64/libgssapi_krb5.so.2.2 $shared_lib/libgssapi_krb5.so.2
+#cp /usr/lib64/libgss.so.3           $shared_lib/.
 cp /usr/lib64/libxslt.so.1          $shared_lib/.
 cp /usr/lib64/libldap-2.4.so.2      $shared_lib/.
 cp /usr/lib64/libldap_r-2.4.so.2    $shared_lib/.
