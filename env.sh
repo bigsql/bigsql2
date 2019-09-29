@@ -10,7 +10,8 @@ P11=11.5-1
 P10=10.10-1
 
 timescaleV=1.4.2-1
-logicalV=2.2-1
+logicalV=2.2.2-1
+spockV=2.2.2-1
 profV=4.1-1
 cstarV=3.1.4-1
 athenafdwV=3.1-2

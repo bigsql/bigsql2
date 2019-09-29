@@ -192,7 +192,7 @@ initDir () {
     $cpCmd $SRC/$pComponent/*  $myNewDir/.
   fi
 
-  copy-pgXX "pglogical2"
+  copy-pgXX "pglogical"
   copy-pgXX "timescaledb"
   copy-pgXX "cassandra_fdw"
   copy-pgXX "athena_fdw"
@@ -378,14 +378,17 @@ initPG () {
   writeSettRow "GLOBAL" "AUTOSTART" "off"
 
   if [ "$pgM" == "10" ]; then 
-    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/pgtsql" "" "" "nil"
+    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
+  fi
+
+  if [ "$pgM" == "10" ] || [ "$pgM" == "11" ]; then 
+    initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
   fi
 
   if [ "$pgM" == "11" ]; then 
     #initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
     ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
-    #initC "pglogical2-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/pglogical" "" "" "nil"
     ##initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
   fi
 }

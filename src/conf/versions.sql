@@ -66,7 +66,8 @@ INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)
 
 INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'prod');
 
-INSERT INTO releases VALUES ('pglogical2-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
+INSERT INTO releases VALUES ('pglogical-pg10', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
+INSERT INTO releases VALUES ('pglogical-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
 INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
 
@@ -101,7 +102,8 @@ INSERT INTO versions VALUES ('pg12', '12rc1-1', 'linux64', 1, '20190926', '');
 
 INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003', 'pg10');
 
-INSERT INTO versions VALUES ('pglogical2-pg11', '2.2-1',  'linux64', 1, '20190904', 'pg11');
+INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 1, '20191003', 'pg10');
+INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 1, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20190826', 'pg11');
 
