@@ -75,6 +75,7 @@ INSERT INTO releases VALUES ('pglogical-pg11', 'pglogical', 'pgLogical', 'Logica
 
 INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
 
+INSERT INTO releases VALUES ('timescaledb-pg10', 'timescaledb', 'TimescaleDB', '', '', '', 'prod');
 INSERT INTO releases VALUES ('timescaledb-pg11', 'timescaledb', 'TimescaleDB', '', '', '', 'prod');
 
 INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'prod');
@@ -112,9 +113,10 @@ INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 1, '20191003
 INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 1, '20191003', 'pg10');
 INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 1, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20190826', 'pg11');
+INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 1, '20190912', 'pg11');
+INSERT INTO versions VALUES ('timescaledb-pg10', '1.4.2-1', 'linux64', 1, '20191003', 'pg10');
+INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 1, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '20190808', 'pg11');
 
