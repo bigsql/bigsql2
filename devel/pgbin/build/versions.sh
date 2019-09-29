@@ -127,7 +127,7 @@ pgLogicalFullV=2.2.2
 pgLogicalShortV=
 pgLogicalBuildV=1
 
-pgSpockFullV=2.2.2
+pgSpockFullV=2.3.1
 pgSpockShortV=
 pgSpockBuildV=1
 
