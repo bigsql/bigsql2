@@ -193,6 +193,7 @@ initDir () {
   fi
 
   copy-pgXX "pglogical"
+  copy-pgXX "pgspock"
   copy-pgXX "timescaledb"
   copy-pgXX "cassandra_fdw"
   copy-pgXX "athena_fdw"
@@ -383,6 +384,7 @@ initPG () {
 
   if [ "$pgM" == "10" ] || [ "$pgM" == "11" ]; then 
     initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
+    initC "pgspock-pg$pgM" "pgspock" "$spockV" "$plat" "postgres/spock" "" "" "nil"
   fi
 
   if [ "$pgM" == "11" ]; then 
