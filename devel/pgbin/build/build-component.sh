@@ -113,17 +113,6 @@ function prepComponentBuildDir {
 		cp "$sharedLibs/$buildOS/R323/lib64/R/lib/libRblas.so" $buildLocation/lib/
 	fi
 
-        if [[ $buildPGCollectd == "true" && ! ${buildLocation/collectd} == "$buildLocation" ]]; then
-        	cp $PGHOME/lib/libgssapi_krb5.so.2 $buildLocation/lib/
-        	cp $PGHOME/lib/libldap_r-2.4.so.2 $buildLocation/lib/
-        	cp $PGHOME/lib/libkrb5.so.3 $buildLocation/lib/
-        	cp $PGHOME/lib/libk5crypto.so.3 $buildLocation/lib/
-        	cp $PGHOME/lib/libcom_err.so.3 $buildLocation/lib/
-        	cp $PGHOME/lib/libkrb5support.so.0 $buildLocation/lib/
-        	cp $PGHOME/lib/liblber-2.4.so.2 $buildLocation/lib/
-        	cp $PGHOME/lib/libsasl2.so.3 $buildLocation/lib/
-		cp /usr/lib64/libltdl.so.7 $buildLocation/lib/
-        fi
 }
 
 
@@ -133,11 +122,6 @@ function cleanUpComponentDir {
 	rm -rf lib/postgresql/plpgsql.so
 	rm -rf include
 	rm -rf lib/postgresql/pgxs
-	if [[ $buildPGCollectd == "false" ]]; then
-		rm -rf lib/libpq*
-		rm -rf lib/libssl.*
-		rm -rf lib/libcrypto.*
-	fi
 	rm -rf lib/libpgport.a
 	rm -rf lib/libpgcommon.a
 
@@ -152,7 +136,7 @@ function  packageComponent {
 	tar -cjf "$componentBundle.tar.bz2" $componentBundle
 	mkdir -p "$targetDir/$workDir"
 	mv "$componentBundle.tar.bz2" "$targetDir/$workDir/"
-	echo "# outDir = $targetDir/$workDir"
+	echo "#     outFile: $targetDir/$workDir/$componentBundle.tar.bz2"
 
 }
 
@@ -184,16 +168,6 @@ function updateSharedLibs {
                 cd $buildLocation/lib/postgresql
 		for file in `dir -d *so*` ; do
              		chrpath -r "\${ORIGIN}/../../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1
-		done
-        fi
-
-
-        if [[ $buildPGCollectd == "true" && ! ${buildLocation/collectd} == "$buildLocation" ]]; then
-                cd $buildLocation/lib/collectd
-                chrpath -r "\${ORIGIN}/../../lib" "postgresql.so" >> $baseDir/$workDir/logs/libPath.log 2>&1
-		cd $buildLocation/sbin
-		for file in `dir -d *` ; do
-			chrpath -r "\${ORIGIN}/../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1
 		done
         fi
 }
@@ -1088,77 +1062,6 @@ function buildpgRepackComponent {
         packageComponent $componentBundle
 }
 
-function buildpgLogicalComponent {
-	comp="pglogical2"
-        componentName="$comp$pgLogicalShortVersion-pg$pgShortVersion-$pgLogicalFullVersion-$pgLogicalBuildV-$buildOS"
-        mkdir -p "$baseDir/$workDir/logs"
-        cd "$baseDir/$workDir"
-        mkdir $comp && tar -xf $pgLogicalSource --strip-components=1 -C $comp
-        cd $comp
-
-        buildLocation="$baseDir/$workDir/build/$componentName"
-
-        prepComponentBuildDir $buildLocation
-
-
-        PATH=$buildLocation/bin:$PATH
-	log=$baseDir/$workDir/logs/$comp-make.log
-        USE_PGXS=1 make > $log 2>&1
-        if [[ $? -eq 0 ]]; then
-                 log=$baseDir/$workDir/logs/$comp-install.log
-                 USE_PGXS=1 make install > $log 2>&1
-                if [[ $? -ne 0 ]]; then
-                        echo "install failed, check $log"
-                fi
-        else
-                echo "Make failed, check $log"
-                return 1
-        fi
-
-        componentBundle=$componentName
-        cleanUpComponentDir $buildLocation
-        updateSharedLibs
-        packageComponent $componentBundle
-}
-
-function buildPGCollectdComponent {
-
-        componentName="collectd$pgCollectdShortVersion-$pgCollectdFullVersion-$pgCollectdBuildV-$buildOS"
-        mkdir -p "$baseDir/$workDir/logs"
-        cd "$baseDir/$workDir"
-        mkdir pgcollectd && tar -xf $pgCollectdSource --strip-components=1 -C pgcollectd
-        cd pgcollectd
-
-        buildLocation="$baseDir/$workDir/build/$componentName"
-
-        prepComponentBuildDir $buildLocation
-
-
-        PATH=$buildLocation/bin:$PATH
-        export LD_LIBRARY_PATH=$buildLocation/lib:$LD_LIBRARY_PATH
-	export LDFLAGS="-Wl,-rpath,$sharedLibs"
-	./build.sh --enable-all-plugins
-	#make distclean > $baseDir/$workDir/logs/pgcollectd_clean.log 2>&1
-        #./configure --prefix=$buildLocation --datarootdir=/tmp --with-libpq=$buildLocation > $baseDir/$workDir/logs/pgcollectd_configure.log 2>&1
-        ./configure --prefix=$buildLocation --with-libpq=$buildLocation > $baseDir/$workDir/logs/pgcollectd_configure.log 2>&1
-        make > $baseDir/$workDir/logs/pgcollectd_make.log 2>&1
-        if [[ $? -eq 0 ]]; then
-                 make install > $baseDir/$workDir/logs/pgcollectd_install.log 2>&1
-                if [[ $? -ne 0 ]]; then
-                        echo "pgCollectd install failed, check logs for details."
-                fi
-        else
-                echo "pgCollectd Make failed, check logs for details."
-                return 1
-        fi
-
-        unset LD_LIBRARY_PATH
-        componentBundle=$componentName
-        cleanUpComponentDir $buildLocation
-        updateSharedLibs
-        packageComponent $componentBundle
-}
-
 
 function buildPGHintPlanComponent {
 
@@ -1228,7 +1131,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l with-pgbin:,build-hypopg:,build-slony:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-collectd:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:build-pgmp:,build-fixeddecimal:,build-number: -- "$@"`
+TEMP=`getopt -l with-pgbin:,build-hypopg:,build-slony:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:build-pgmp:,build-fixeddecimal:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -1268,8 +1171,8 @@ while true; do
     --build-cstore-fdw ) buildCstoreFDW=true; cstoreFDWSource=$2; shift; shift ;;
     --build-parquet-fdw ) buildParquetFDW=true; parquetFDWSource=$2; shift; shift ;;
     --build-pgrepack ) buildpgRepack=true; pgrepackSource=$2; shift; shift ;;
-    --build-pglogical ) buildpgLogical=true; pgLogicalSource=$2; shift; shift ;;
-    --build-collectd ) buildPGCollectd=true; pgCollectdSource=$2; shift; shift ;;
+    --build-pglogical ) buildpgLogical=true; Source=$2; shift; shift ;;
+    --build-pgspock ) buildpgSpock=true; Source=$2; shift; shift ;;
     --build-hintplan ) buildPGHintPlan=true; pgHintplanSource=$2; shift; shift ;;
     --build-timescaledb ) buildTimeScaleDB=true; timescaleDBSource=$2; shift; shift ;;
     --build-pgagent ) buildPGAgent=true; pgAgentSource=$2; shift; shift ;;
@@ -1339,6 +1242,14 @@ if [ "$buildWalg" == "true" ]; then
 	buildComp wal_g "$walgShortV" "$walgFullV" "$walgBuildV" "$Source"
 fi
 
+if [[ $buildpgLogical == "true" ]]; then
+	buildComp pglogical  "$pgLogicalShortV" "$pgLogicalFullV" "$pgLogicalBuildV" "$Source"
+fi
+
+if [[ $buildpgSpock == "true" ]]; then
+	buildComp pgspock  "$pgSpockShortV" "$pgSpockFullV" "$pgSpockBuildV" "$Source"
+fi
+
 if [[ $buildPLDebugger == "true" ]]; then
 	buildComp pldebugger  "$debugShortV" "$debugFullV" "$debugBuildV" "$Source"
 fi
@@ -1386,12 +1297,6 @@ if [[ $buildParquetFDW == "true" ]]; then
 fi
 if [[ $buildpgRepack == "true" ]]; then
 	buildpgRepackComponent
-fi
-if [[ $buildpgLogical == "true" ]]; then
-	buildpgLogicalComponent
-fi
-if [[ $buildPGCollectd == "true" ]]; then
-        buildPGCollectdComponent
 fi
 if [[ $buildPGHintPlan == "true" ]]; then
         buildPGHintPlanComponent
