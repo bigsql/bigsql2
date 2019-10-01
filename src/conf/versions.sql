@@ -103,7 +103,7 @@ INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190926', '');
 
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
-INSERT INTO versions VALUES ('pg12', '12rc1-1', 'linux64', 1, '20190926', '');
+INSERT INTO versions VALUES ('pg12', '12.0-1', 'linux64', 1, '20191003', '');
 
 INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003', 'pg10');
 

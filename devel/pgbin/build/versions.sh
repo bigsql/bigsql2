@@ -3,7 +3,7 @@
 
 pgcServer="192.168.11.139"
 
-pg12V="12rc1"
+pg12V="12.0"
 pg12BuildV=1
 
 pg11V="11.5"

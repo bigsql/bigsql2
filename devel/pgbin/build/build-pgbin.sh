@@ -88,7 +88,7 @@ function checkPostgres {
 		exit 1
 	else
 		pgSrcV=`$pgSrcDir/configure --version | head -1 | awk '{print $3}'`
-		if [[ "${pgSrcV/rc}" =~ ^12rc* ]]; then
+		if [[ "${pgSrcV/rc}" =~ ^12.* ]]; then
 			pgShortV="12"
 			pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^11.* ]]; then
@@ -96,11 +96,9 @@ function checkPostgres {
 			pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^10.* ]]; then
 			pgShortV="10"
-		elif [[ "${pgSrcV/rc}" == "$pgSrcV" ]]; then
-			pgShortV="`echo $pgSrcV | awk -F '.' '{print $1$2}'`"
 		else
-			pgShortV="`echo $pgSrcV | awk -F '.' '{print $1$2}'`"
-                	pgShortV="`echo ${pgShortV:0:2}`"
+			echo "ERROR: Could not determine Postgres Version for '$pgSrcV'"
+			exit 1
 		fi
 	fi
 }
