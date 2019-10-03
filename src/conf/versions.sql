@@ -99,7 +99,7 @@ CREATE TABLE versions (
 
 INSERT INTO versions VALUES ('hub', '5.0.0', '', 1, '20191003', '');
 
-INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190926', '');
+INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190808', '');
 
 INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
 
@@ -110,8 +110,8 @@ INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003'
 INSERT INTO versions VALUES ('pgspock-pg10', '2.3.1-1',  'linux64', 1, '20191003', 'pg10');
 INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 1, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 1, '20191003', 'pg10');
-INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 1, '20191003', 'pg11');
+INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 0, '20191003', 'pg10');
+INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 0, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
 
