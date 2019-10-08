@@ -97,7 +97,8 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '5.0.0', '', 1, '20191003', '');
+INSERT INTO versions VALUES ('hub', '5.0.1', '', 1, '20191008', '');
+INSERT INTO versions VALUES ('hub', '5.0.0', '', 0, '20191003', '');
 
 INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190808', '');
 
