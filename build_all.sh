@@ -19,6 +19,11 @@ else
   exit 1
 fi
 
+if [ "$OUT" == "" ] || [ "$APG" == "" ]; then
+  echo "ERROR: Environment is not set"
+  exit 1
+fi
+
 
 buildALL () {
   bigV=$1

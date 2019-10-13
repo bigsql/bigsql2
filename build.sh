@@ -21,6 +21,11 @@ else
   PYTHON=python3
 fi
 
+if [ "$OUT" == "" ] || [ "$APG" == "" ]; then
+  echo "ERROR: Environment is not set"
+  exit 1
+fi
+
 
 printUsageMessage () {
   echo "#--------------------------------------------------------#"

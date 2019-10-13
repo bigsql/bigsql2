@@ -8,15 +8,7 @@ sudo yum update -y
 sudo yum install -y git 
 sudo yum install -y net-tools zip unix2dos wget bzip2 python-pip
 sudo yum install -y epel-release
-
 sudo yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
-ANT=apache-ant-1.9.14-bin.tar.gz
-cd ~
-wget http://mirror.reverse.net/pub/apache/ant/binaries/$ANT
-tar -xvf $ANT
-rm $ANT
-
-sudo pip install awscli pssh --user
 
 ## Setup dev environment ####################################
 ```
@@ -38,9 +30,6 @@ export HIST=$DEV/apg_history
 export IN=$DEV/in
 export OUT=$DEV/out
 
-export NIMOY=$DEV/nimoy
-export RMT=$NIMOY/remote
-
 export APG=$DEV/bigsql2
 export DEVEL=$APG/devel
 export PG=$DEVEL/pg
@@ -54,14 +43,23 @@ export PSX=$APG/out/posix
 export REPO=http://localhost:8000
 
 export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk
-export ANT_HOME=~/apache-ant-1.9.14
-export PATH=$PATH:$JAVA_HOME/bin:$ANT_HOME/bin
+export PATH=$PATH:$JAVA_HOME/bin
 
-## Steps to make new components ######################################
+## Steps to configure new components ######################################
 
 * Update env.sh with the current (new) version #
 * Update versions.sql to include the new version #'s and mark prior version as not current
 * Ensure file in $IN
 * Remove files from $OUT (including the checksum file for the component)
 * run build_all.sh
+
+## Steps to setup an environment to compile components ###############
+sudo mkdir /opt/pgbin-build
+chmod 777 /opt/pgbin-build
+sudo chown $USER:$USER /opt/pgbin-build
+mkdir /opt/pgbin-build/pgbin
+mkdir /opt/pgbin-build/pgbin/bin
+
+
+
 
