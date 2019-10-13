@@ -1,7 +1,7 @@
 v96=9.6.15
 v10=10.10
 v11=11.5
-v12=12rc1
+v12=12.0
 
 fatalError () {
   echo "FATAL ERROR!  $1"
