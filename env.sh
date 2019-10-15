@@ -9,6 +9,7 @@ P12=12.0-1
 P11=11.5-1
 P10=10.10-1
 
+omniV=2.16-1
 timescaleV=1.4.2-1
 logicalV=2.2.2-1
 spockV=2.3.1-1

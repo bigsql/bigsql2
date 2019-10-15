@@ -44,7 +44,9 @@ INSERT INTO projects VALUES ('pglogical', 2, 0, 'hub', 0, 'https://github.com/2n
 INSERT INTO projects VALUES ('pgspock', 2, 0, 'hub', 0, 'https://github.com/bigsql/pgspock', 'Logical Bi-Directional Replication');
 INSERT INTO projects VALUES ('pgtsql', 2, 0, 'hub', 0, '', '');
 
-INSERT INTO projects VALUES ('pip',  4,    0, 'hub', 0, '',                                  '');
+INSERT INTO projects VALUES ('pip',     4,    0, 'hub', 0, '', '');
+INSERT INTO projects VALUES ('omnidb',  3, 8000, 'hub', 0, '', '');
+
 INSERT INTO projects VALUES ('salt', 3, 4505, 'hub', 0, 'https://github.com/saltstack/salt', 'Cluster Mgmt in the Cloud');
 
 
@@ -82,8 +84,9 @@ INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFD
 
 INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'prod');
 
-INSERT INTO releases VALUES ('pip',  'pip',   '', '', '', '', 'test');
-INSERT INTO releases VALUES ('salt', 'salt',  '', '', '', '', 'test');
+INSERT INTO releases VALUES ('omnidb',  'omnidb',   '', '', '', '', 'test');
+INSERT INTO releases VALUES ('pip',     'pip',      '', '', '', '', 'test');
+INSERT INTO releases VALUES ('salt',    'salt',     '', '', '', '', 'test');
 
 
 CREATE TABLE versions (
@@ -97,7 +100,7 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '5.0.1', '', 1, '20191013', '');
+INSERT INTO versions VALUES ('hub', '5.0.1', '', 1, '20191101', '');
 INSERT INTO versions VALUES ('hub', '5.0.0', '', 0, '20191003', '');
 
 INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190808', '');
@@ -125,5 +128,6 @@ INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 0, '20190708
 
 INSERT INTO versions VALUES ('salt', '2019pp', 'linux64', 0, '20190912', '');
 
-INSERT INTO versions VALUES ('pip', '19pp', 'linux64', 0, '20190912', '');
+INSERT INTO versions VALUES ('pip',    '19pp',   'linux64', 0, '20190912', '');
+INSERT INTO versions VALUES ('omnidb', '2.16-1', 'linux64', 1, '20191101', '');
 
