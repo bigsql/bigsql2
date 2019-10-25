@@ -32,22 +32,17 @@ CREATE TABLE projects (
   short_desc     TEXT    NOT NULL,
   FOREIGN KEY (category) REFERENCES categories(category)
 );
-INSERT INTO projects VALUES ('hub', 0, 0, 'hub', 0, 'http://bigsql.org', 'API for PG (APG)');
-
-INSERT INTO projects VALUES ('pg', 1, 5432, 'hub', 1, 'http://postgresql.org', 'Advanced RDBMS');
-
-INSERT INTO projects VALUES ('plprofiler', 2, 0, 'hub', 0, 'https://github.com/bigsql/plprofiler', 'PLpg/SQL Profiler');
-INSERT INTO projects VALUES ('cassandra_fdw', 2, 0, 'hub', 0, 'http://cassandrafdw.org', 'Cassandra Foreign Data Wrapper');
-INSERT INTO projects VALUES ('athena_fdw', 2, 0, 'hub', 0, 'https://github.com/bigsql/athena_fdw', 'Hive/Athena Foreign Data Wrapper');
-INSERT INTO projects VALUES ('timescaledb', 2, 0, 'hub', 0, 'https://github.com/bigsql/apache_timescaledb', 'Timeseries Extension');
-INSERT INTO projects VALUES ('pglogical', 2, 0, 'hub', 0, 'https://github.com/2ndQuadrant/pglogical', 'Logical Replication');
-INSERT INTO projects VALUES ('pgspock', 2, 0, 'hub', 0, 'https://github.com/bigsql/pgspock', 'Logical Bi-Directional Replication');
-INSERT INTO projects VALUES ('pgtsql', 2, 0, 'hub', 0, '', '');
-
-INSERT INTO projects VALUES ('pip',     4,    0, 'hub', 0, '', '');
-INSERT INTO projects VALUES ('omnidb',  3, 8000, 'hub', 0, '', '');
-
-INSERT INTO projects VALUES ('salt', 3, 4505, 'hub', 0, 'https://github.com/saltstack/salt', 'Cluster Mgmt in the Cloud');
+INSERT INTO projects VALUES ('hub',           0, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('pg',            1, 5432, 'hub', 1, '', '');
+INSERT INTO projects VALUES ('plprofiler',    2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('cassandra_fdw', 2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('athena_fdw',    2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('pglogical',     2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('timescaledb',   2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('pgspock',       2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('pgtsql',        2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('omnidb',        3, 8000, 'hub', 0, '', '');
+INSERT INTO projects VALUES ('patroni',       3, 1234, 'hub', 0, '', '');
 
 
 CREATE TABLE releases (
@@ -84,8 +79,8 @@ INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFD
 
 INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'prod');
 
+INSERT INTO releases VALUES ('patroni', 'patroni',  '', '', '', '', 'test');
 INSERT INTO releases VALUES ('omnidb',  'omnidb',   '', '', '', '', 'test');
-INSERT INTO releases VALUES ('pip',     'pip',      '', '', '', '', 'test');
 INSERT INTO releases VALUES ('salt',    'salt',     '', '', '', '', 'test');
 
 
@@ -126,8 +121,8 @@ INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '201
 
 INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 0, '20190708', 'pg11');
 
-INSERT INTO versions VALUES ('salt', '2019pp', 'linux64', 0, '20190912', '');
 
-INSERT INTO versions VALUES ('pip',    '19pp',   'linux64', 0, '20190912', '');
-INSERT INTO versions VALUES ('omnidb', '2.16-1', 'linux64', 1, '20191101', '');
+INSERT INTO versions VALUES ('salt',    '2019pp', 'linux64', 0, '20190912', '');
+INSERT INTO versions VALUES ('omnidb',  '2.16-1', 'linux64', 0, '20191101', '');
+INSERT INTO versions VALUES ('patroni', '1.6.0',  'linux64', 1, '20191101', '');
 

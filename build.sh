@@ -31,7 +31,7 @@ printUsageMessage () {
   echo "#--------------------------------------------------------#"
   echo "# -p $P12  $P11  $P10  cassandra_fdw-$cstarV"
   echo "#    timescale-$timescaleV  athenafdw-$athenafdwV"
-  echo "#    plprofiler-$profV  pgtsql-$tsqlV"
+  echo "#    plprofiler-$profV  pgtsql-$tsqlV  patroni-$patroniV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
   echo "#--------------------------------------------------------#"
@@ -382,6 +382,8 @@ initPG () {
 
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
+
+  initC "patroni" "patroni" "$patroniV"  "$plat" "postgres/patroni" "" "" "nil"
 
   if [ "$pgM" == "10" ]; then 
     initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
