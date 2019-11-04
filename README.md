@@ -55,11 +55,8 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 ## Steps to setup an environment to compile components ###############
 sudo mkdir /opt/pgbin-build
-chmod 777 /opt/pgbin-build
+sudo chmod 777 /opt/pgbin-build
 sudo chown $USER:$USER /opt/pgbin-build
 mkdir /opt/pgbin-build/pgbin
 mkdir /opt/pgbin-build/pgbin/bin
-
-
-
 
