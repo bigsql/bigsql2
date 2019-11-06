@@ -577,10 +577,10 @@ while getopts "t:a:b:k:o:n:h" opt; do
 				continue
 			fi
 			backrestTar=$OPTARG
-			## buildBackrest=1
-			## echo "# -k $backrestTar"
-			buildBackrest=0
-			echo "# -k $backrestTar (IGNORING THIS FOR NOW)"
+			buildBackrest=1
+			echo "# -k $backrestTar"
+			##buildBackrest=0
+			##echo "# -k $backrestTar (IGNORING THIS FOR NOW)"
 		;;
 		o) 	if [[ OPTARG = -* ]]; then
 				((OPTIND--))

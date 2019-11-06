@@ -15,7 +15,7 @@ pg10BuildV=1
 ## these are built w/ pgbin-linux.sh command line options"
 bouncerV="1.12.0"
 odbcV="12.00.0000"
-backrestV="2.17"
+backrestV="2.18"
 
 ## BDR Experimental
 pg94V=9.4.20
