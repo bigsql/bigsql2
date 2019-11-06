@@ -114,8 +114,10 @@ INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 0, '201910
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('timescaledb-pg10', '1.4.2-1', 'linux64', 1, '20191003', 'pg10');
-INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 1, '20191003', 'pg11');
+INSERT INTO versions VALUES ('timescaledb-pg10', '1.5.0-1', 'linux64', 1, '20191114', 'pg10');
+INSERT INTO versions VALUES ('timescaledb-pg11', '1.5.0-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('timescaledb-pg10', '1.4.2-1', 'linux64', 0, '20191003', 'pg10');
+INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 0, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '20190808', 'pg11');
 

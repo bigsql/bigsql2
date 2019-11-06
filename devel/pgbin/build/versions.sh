@@ -143,7 +143,7 @@ hintplanFullVersion=1.3.2
 hintplanShortVersion=
 hintplanBuildV=1
 
-timescaledbFullVersion=1.4.2
+timescaledbFullVersion=1.5.0
 timescaledbShortVersion=
 timescaledbBuildV=1
 

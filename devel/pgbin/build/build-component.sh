@@ -1013,6 +1013,7 @@ function buildParquetFDWComponent {
 
         PATH=$buildLocation/bin:$PATH:/opt/pgbin-build/pgbin/shared/linux_64/bin
         make_log=$baseDir/$workDir/logs/parquet_make.log
+        export CPPFLAGS="$CPPFLAGS -std=c++11"
         USE_PGXS=1 make > $make_log 2>&1
         if [[ $? -eq 0 ]]; then
                  USE_PGXS=1 make install > $baseDir/$workDir/logs/parquet_install.log 2>&1
@@ -1111,17 +1112,25 @@ function buildTimeScaleDBComponent {
 
         PATH=/opt/pgbin-build/pgbin/bin:$buildLocation/bin:$PATH
 
-	./bootstrap -DAPACHE_ONLY=1 > $baseDir/$workDir/logs/timescaledb_bootstrap.log 2>&1
+	bootstrap_log=$baseDir/$workDir/logs/timescaledb_bootstrap.log
+	./bootstrap -DAPACHE_ONLY=1 -DREGRESS_CHECKS=OFF > $bootstrap_log 2>&1
+        if [[ $? -ne 0 ]]; then
+                echo "timescaledb Bootstrap failed, check logs for details."
+                echo "  $bootstrap_log"
+                return 1
+        fi
 
 	cd build
-        USE_PGXS=1 make -d > $baseDir/$workDir/logs/timescaledb_make.log 2>&1
+        make_log=$baseDir/$workDir/logs/timescaledb_make.log
+        USE_PGXS=1 make -d > $make_log 2>&1
         if [[ $? -eq 0 ]]; then
-                 USE_PGXS=1 make install > $baseDir/$workDir/logs/timescaledb_install.log 2>&1
+                USE_PGXS=1 make install > $baseDir/$workDir/logs/timescaledb_install.log 2>&1
                 if [[ $? -ne 0 ]]; then
                         echo "timescaledb install failed, check logs for details."
                 fi
         else
                 echo "timescaledb Make failed, check logs for details."
+                echo "  $make_log"
                 return 1
         fi
 
