@@ -181,10 +181,10 @@ function buildPostgres {
 	echo "#    configure @ $buildLocation"
 
 	conf="./configure --prefix=$buildLocation" 
-	##conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
-	conf="$conf --with-openssl --with-libxslt --with-libxml"
-	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
-	conf="$conf --with-uuid=ossp --with-python --with-perl"
+	conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
+	##conf="$conf --with-openssl --with-libxslt --with-libxml"
+	conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
+	##conf="$conf --with-uuid=ossp --with-python --with-perl"
 	conf="$conf --with-tcl --with-pam"
 	
 	if [ $pgShortV == "11" ] || [ $pgShortV == "12" ]; then
@@ -617,7 +617,7 @@ if [ "$buildBouncer" == "1" ]; then
   buildApp "checkBouncer" "buildBouncer"
 fi
 
-if [ "$buildODCB" == "1" ]; then
+if [ "$buildODBC" == "1" ]; then
   buildApp "checkODBC" "buildODBC"
 fi
 
