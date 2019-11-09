@@ -30,7 +30,7 @@ fi
 printUsageMessage () {
   echo "#--------------------------------------------------------#"
   echo "# -p $P12  $P11  $P10  cassandra_fdw-$cstarV"
-  echo "#    timescale-$timescaleV  athenafdw-$athenafdwV"
+  echo "#    timescale-$timescaleV  athenafdw-$athenafdwV anon-$anonV"
   echo "#    plprofiler-$profV  pgtsql-$tsqlV  patroni-$patroniV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
@@ -200,6 +200,7 @@ initDir () {
   copy-pgXX "pglogical"
   copy-pgXX "pgspock"
   copy-pgXX "timescaledb"
+  copy-pgXX "anon"
   copy-pgXX "cassandra_fdw"
   copy-pgXX "athena_fdw"
   copy-pgXX "plprofiler"
@@ -399,6 +400,10 @@ initPG () {
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
     ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
     ##initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
+  fi
+
+  if [ "$pgM" == "11" ] || [ "$pgM" == "12" ]; then 
+    initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
   fi
 }
 
