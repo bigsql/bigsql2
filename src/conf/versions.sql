@@ -39,6 +39,7 @@ INSERT INTO projects VALUES ('cassandra_fdw', 2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('athena_fdw',    2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('pglogical',     2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('timescaledb',   2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('ddlx',          2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('anon',          2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('pgspock',       2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('pgtsql',        2, 0,    'hub', 0, '', '');
@@ -72,6 +73,9 @@ INSERT INTO releases VALUES ('pglogical-pg10', 'pglogical', 'pgLogical', 'Logica
 INSERT INTO releases VALUES ('pglogical-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
 INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
+
+INSERT INTO releases VALUES ('ddlx-pg11', 'ddlx', 'DDL Extractor', '', '', '', 'prod');
+INSERT INTO releases VALUES ('ddlx-pg12', 'ddlx', 'DDL Extractor', '', '', '', 'prod');
 
 INSERT INTO releases VALUES ('anon-pg11', 'anon', 'Anonymizer', '', '', '', 'prod');
 INSERT INTO releases VALUES ('anon-pg12', 'anon', 'Anonymizer', '', '', '', 'prod');
@@ -117,6 +121,9 @@ INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 0, '201910
 INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 0, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
+
+INSERT INTO versions VALUES ('ddlx-pg11', '0.15-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('ddlx-pg12', '0.15-1', 'linux64', 1, '20191114', 'pg12');
 
 INSERT INTO versions VALUES ('anon-pg11', '0.5.0-1', 'linux64', 1, '20191114', 'pg11');
 INSERT INTO versions VALUES ('anon-pg12', '0.5.0-1', 'linux64', 1, '20191114', 'pg12');

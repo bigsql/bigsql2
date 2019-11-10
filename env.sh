@@ -10,6 +10,7 @@ P11=11.5-1
 P10=10.10-1
 
 anonV=0.5.0-1
+ddlxV=0.15-1
 omniV=2.16-1
 timescaleV=1.5.0-1
 logicalV=2.2.2-1

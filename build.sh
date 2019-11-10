@@ -30,7 +30,8 @@ fi
 printUsageMessage () {
   echo "#--------------------------------------------------------#"
   echo "# -p $P12  $P11  $P10  cassandra_fdw-$cstarV"
-  echo "#    timescale-$timescaleV  athenafdw-$athenafdwV anon-$anonV"
+  echo "#    timescale-$timescaleV  athenafdw-$athenafdwV"
+  echo "#    anon-$anonV  ddlx-$ddlxV"
   echo "#    plprofiler-$profV  pgtsql-$tsqlV  patroni-$patroniV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
@@ -403,6 +404,7 @@ initPG () {
   fi
 
   if [ "$pgM" == "11" ] || [ "$pgM" == "12" ]; then 
+    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
     initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
   fi
 }
