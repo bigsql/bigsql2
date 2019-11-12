@@ -86,7 +86,4 @@ fi
 echo "###  build-all-pgbin.sh"
 runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
 
-# BDR
-#runPgBin "$binBld" "$pgSrc-$pg94V.$tgz" "$pg94BuildV"
-
 exit

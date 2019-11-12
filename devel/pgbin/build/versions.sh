@@ -15,10 +15,6 @@ bouncerV="1.12.0"
 odbcV="12.00.0000"
 backrestV="2.18"
 
-## BDR Experimental
-pg94V=9.4.20
-pg94BuildV=1
-
 hypopgFullV=1.1.3
 hypopgShortV=
 hypopgBuildV=1
@@ -35,10 +31,6 @@ postgisBuildV=1
 backgroundFullVersion=1.0
 backgroundShortVersion=1
 backgroundBuildV=1
-
-slonyFullVersion=2.2.6
-slonyShortVersion=22
-slonyBuildV=1
 
 athenaFullV=3.1
 athenaShortV=
@@ -80,10 +72,6 @@ plProfilerFullVersion=4.1
 plProfilerShortVersion=
 plprofilerBuildV=1
 
-bdrFullV=1.0.7
-bdrShortV=
-bdrBuildV=2
-
 debugFullV=1.1
 debugShortV=
 debugBuildV=3
@@ -122,7 +110,7 @@ plV8FullVersion=1.4.8
 plV8ShortVersion=14
 plV8BuildV=1
 
-pgTSQLFullVersion=2.0.2
+pgTSQLFullVersion=3.0beta1
 pgTSQLShortVersion=
 pgTSQLBuildV=1
 

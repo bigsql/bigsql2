@@ -229,16 +229,6 @@ function buildPostgres {
 		if [[ $? -ne 0 ]]; then
 			echo "Failed to install contrib modules ...."
 		fi
-
-		if [ -d "bdr" ]; then
-			echo "#   building BDR plugin"
-			PATH="$PATH:$buildLocation/bin"
-			cd bdr
-			./autogen.sh
-			./configure
-			make -j5 -s all
-			make -s install
-		fi
 	fi
 
 	oldPath=$PATH

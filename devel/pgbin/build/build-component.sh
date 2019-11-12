@@ -173,61 +173,6 @@ function updateSharedLibs {
 }
 
 
-function buildSlonyComponent {
-	PGHOME=$pgBin
-
-	mkdir -p "$baseDir/$workDir"
-	cd "$baseDir/$workDir"
-	mkdir slony && tar -xf $slonySource --strip-components=1 -C slony
-	cd slony
-
-	componentFullVersion=`./configure --version | head -n1 | awk '{print $3}'`
-	componentShortVersion=`echo $componentFullVersion | awk -F '.' '{print$1$2}'`
-	buildLocation="$baseDir/$workDir/build/slony$componentShortVersion-pg$pgShortVersion-$componentFullVersion-$slonyBuildV-$buildOS"
-
-	prepComponentBuildDir $buildLocation
-
-	mkdir -p "$baseDir/$workDir/logs"
-	export LD_LIBRARY_PATH=$buildLocation/lib:$LD_LIBRARY_PATH
-
-	./configure --with-pgconfigdir=$buildLocation/bin --disable-rpath --with-pgport LDFLAGS="-Wl,-rpath,SLONY_BIN_ORIGIN/../lib/" > "$baseDir/$workDir/logs/slony_configure.log" 2>&1
-
-	if [[ $? -ne 0 ]]; then
-		echo "Configure failed for slony, check logs for details."
-		return 1
-	fi
-	make > "$baseDir/$workDir/logs/slony_make.log" 2>&1
-	if [[ $? -ne 0 ]]; then
-		echo "make failed for slony, check logs for details."
-		return 1
-	fi
-	make install > "$baseDir/$workDir/logs/slony_install.log" 2>&1
-	if [[ $? -ne 0 ]]; then
-		echo "Install failed for slony, check logs for details."
-		return 1
-	fi
-
-
-	cd $buildLocation/bin
-	chrpath -r "\${ORIGIN}/../lib" * >> $baseDir/$workDir/logs/libPath.log 2>&1
-
-        cd $buildLocation/lib
-
-
-        if [[ -d "$buildLocation/lib/postgresql" ]]; then
-                cd $buildLocation/lib/postgresql
-
-             	chrpath -r "\${ORIGIN}/../../lib" * >> $baseDir/$workDir/logs/libPath.log 2>&1
-
-        fi
-
-	componentBundle="slony$componentShortVersion-pg$pgShortVersion-$componentFullVersion-$slonyBuildV-$buildOS"
-
-	cleanUpComponentDir $buildLocation
-	updateSharedLibs
-	packageComponent $componentBundle
-}
-
 function buildCassandraFDWComponent {
 
 	componentName="cassandra_fdw$cassandraFDWShortVersion-pg$pgShortVersion-$cassandraFDWFullVersion-$cassandraFDWBuildV-$buildOS"
@@ -600,12 +545,6 @@ function buildComp {
         echo "#    make_log: $make_log"
         install_log="$log_dir/$comp-install.log"
         echo "# install_log: $install_log"
-
-        if [ "$comp" == "bdr_plugin" ]; then
-           echo "Building BDR Plugin"
-           ./autogen.sh
-           ./configure
-        fi
 
         if [ "$comp" == "athena_fdw" ]; then
            buildLib=$buildLocation/lib
@@ -1140,7 +1079,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l with-pgbin:,build-hypopg:,build-slony:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anonymizer:,build-ddlx:,build-number: -- "$@"`
+TEMP=`getopt -l with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anonymizer:,build-ddlx:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -1168,9 +1107,7 @@ while true; do
     --build-walg ) buildWalg=true; Source=$2; shift; shift ;;
     --build-hypopg ) buildHypopg=true; Source=$2; shift; shift ;;
     --build-pldebugger ) buildPLDebugger=true; Source=$2; shift; shift ;;
-    --build-bdrplugin ) buildBdrPlugin=true; Source=$2; shift; shift ;;
     --build-pgpartman ) buildPGPartman=true; pgpartmanSource=$2; shift; shift ;;
-    --build-slony ) buildSlony=true; slonySource=$2; shift; shift ;;
     --build-plr ) buildPlr=true; plrSource=$2; shift; shift ;;
     --build-plv8 ) buildPlV8=true; plV8Source=$2; shift; shift ;;
     --build-pljava ) buildPlJava=true; plJavaSource=$2; shift; shift ;;
@@ -1206,12 +1143,6 @@ echo "#       pgBin: $pgBin"
 getPGVersion
 
 PGHOME=$pgBin
-
-
-if [[ $buildSlony == "true" ]]; then
-	echo "Building Slony"
-	buildSlonyComponent
-fi
 
 if [[ $buildCassandraFDW == "true" ]]; then
 	buildCassandraFDWComponent
@@ -1263,10 +1194,6 @@ fi
 
 if [[ $buildPLDebugger == "true" ]]; then
 	buildComp pldebugger  "$debugShortV" "$debugFullV" "$debugBuildV" "$Source"
-fi
-
-if [[ $buildBdrPlugin  == "true" ]]; then
-	buildComp bdr_plugin  "$bdrShortV" "$bdrFullV" "$bdrBuildV" "$Source"
 fi
 
 if [[ $buildPGPartman == "true" ]]; then
