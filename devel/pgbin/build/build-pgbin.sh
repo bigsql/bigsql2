@@ -391,7 +391,6 @@ function copySharedLibs {
 	cp $sharedLibs/libkrb5support.so $buildLocation/lib/
 	cp $sharedLibs/libkrb5.so.3 $buildLocation/lib/
 	cp $sharedLibs/libcom_err.so.3 $buildLocation/lib/
-	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
 	cp $sharedLibs/libxslt.so.1 $buildLocation/lib/
 	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
 	cp $sharedLibs/libldap-2.4.so.2 $buildLocation/lib/
@@ -399,8 +398,12 @@ function copySharedLibs {
 	cp $sharedLibs/liblber-2.4.so.2 $buildLocation/lib/
 	cp $sharedLibs/libsasl2.so.3 $buildLocation/lib/
 	cp $sharedLibs/libxml2.so* $buildLocation/lib/
-	chmod 755 $buildLocation/lib/libuuid.so.16
 	cp $sharedLibs/libevent-2.0.so.5 $buildLocation/lib/
+        cp $sharedLibs/libgss.so.3 $buildLocation/lib/
+
+	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
+	chmod 755 $buildLocation/lib/libuuid.so.16
+
 }
 
 function updateSharedLibPaths {
@@ -430,36 +433,6 @@ function updateSharedLibPaths {
         	done
 	fi
 	
-}
-
-
-function scpToPgcServer {
-	echo "# scpToPgcServer()"
-
-	pgcServer="192.168.11.139"
-	echo "#    pgcServer=$pgcServer"
-
-	destDir=`date +%Y-%m-%d`
-	destDir="/home/build/remote/$destDir"
-	destSvr="build@$pgcServer"
-	destiny="$destSvr:$destDir"
-	echo "#    destiny=$destiny"
-
-       	ssh $destSvr "mkdir -p $destDir"
-       	scp $tarFile $destiny/
-
-	return
-
-	#bzip2 $pgbinTar
-	#if [[ $? -eq 0 ]]; then
-	#	mkdir -p $archiveDir/$workDir
-	#	mv "$pgbinTar.bz2" $archiveDir/$workDir/
-	# 	Below change is for the Nightly build
-	#	cp $archiveDir/$workDir/$pgbinTar.bz2 /opt/pginstall/
-	#else
-	#	echo "Unable to place the archive .... "
-	#fi
-
 }
 
 
@@ -628,7 +601,6 @@ fi
 checkCmd "copySharedLibs"
 checkCmd "updateSharedLibPaths"
 checkCmd "createBundle"
-##checkCmd "scpToPgcServer"
 
 endTime=`date +%Y-%m-%d_%H:%M:%S`
 echo "### end at $endTime"

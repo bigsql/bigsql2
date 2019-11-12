@@ -1,15 +1,13 @@
 #!/bin/bash
 # Set build version for pgBin and components.
 
-pgcServer="192.168.11.139"
-
-pg12V="12.0"
+pg12V="12.1"
 pg12BuildV=1
 
-pg11V="11.5"
+pg11V="11.6"
 pg11BuildV=1
 
-pg10V="10.10"
+pg10V="10.11"
 pg10BuildV=1
 
 ## these are built w/ pgbin-linux.sh command line options"
@@ -94,6 +92,15 @@ debugBuildV=3
 fdFullV=1.1.0
 fdShortV=
 fdBuildV=1
+
+#postgresql_anonymizer
+anonFullV=0.5.0
+anonShortV=
+anonBuildV=1
+
+ddlxFullV=0.15
+ddlxShortV=
+ddlxBuildV=1
 
 pgAuditFullVersion=1.3.1
 pgAuditShortVersion=13

@@ -1140,7 +1140,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l with-pgbin:,build-hypopg:,build-slony:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:build-pgmp:,build-fixeddecimal:,build-number: -- "$@"`
+TEMP=`getopt -l with-pgbin:,build-hypopg:,build-slony:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anonymizer:,build-ddlx:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -1188,6 +1188,8 @@ while true; do
     --build-cron ) buildCron=true; cronSource=$2; shift; shift ;;
     --build-pgmp ) buildPgMp=true; pgmpSource=$2; shift; shift ;;
     --build-fixeddecimal ) buildFD=true; Source=$2; shift; shift ;;
+    --build-anonymizer ) buildAnon=true; Source=$2; shift; shift ;;
+    --build-ddlx ) buildDdlx=true; Source=$2; shift; shift ;;
     --build-number ) buildNumber=$2; shift; shift ;;
     -- ) shift; break ;;
     -* ) echo "Invalid Option Passed"; exit 1; ;;
@@ -1327,6 +1329,12 @@ if [[ $buildBouncer == "true" ]]; then
 fi
 if [[ $buildFD == "true" ]]; then
 	buildComp fixeddecimal "$fdShortV" "$fdFullV" "$fdBuildV" "$Source"
+fi
+if [[ $buildAnon == "true" ]]; then
+	buildComp anon "$anonShortV" "$anonFullV" "$anonBuildV" "$Source"
+fi
+if [[ $buildDdlx == "true" ]]; then
+	buildComp ddlx "$ddlxShortV" "$ddlxFullV" "$ddlxBuildV" "$Source"
 fi
 
 destDir=`date +%Y-%m-%d`
