@@ -66,26 +66,20 @@ INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)
 
 INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'prod');
 
-INSERT INTO releases VALUES ('pgspock-pg10', 'pgspock', 'pgSpock', 'Logical Bi-Directional Replication', '', '', 'prod');
 INSERT INTO releases VALUES ('pgspock-pg11', 'pgspock', 'pgSpock', 'Logical Bi-Directional Replication', '', '', 'prod');
 
-INSERT INTO releases VALUES ('pglogical-pg10', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 INSERT INTO releases VALUES ('pglogical-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
 INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
 
-INSERT INTO releases VALUES ('ddlx-pg11', 'ddlx', 'DDL Extractor', '', '', '', 'prod');
-INSERT INTO releases VALUES ('ddlx-pg12', 'ddlx', 'DDL Extractor', '', '', '', 'prod');
+INSERT INTO releases VALUES ('ddlx-pg11', 'ddlx', 'DDL Extractor', '', '', '', 'test');
 
-INSERT INTO releases VALUES ('anon-pg11', 'anon', 'Anonymizer', '', '', '', 'prod');
-INSERT INTO releases VALUES ('anon-pg12', 'anon', 'Anonymizer', '', '', '', 'prod');
+INSERT INTO releases VALUES ('anon-pg11', 'anon', 'Anonymizer', '', '', '', 'test');
 
-INSERT INTO releases VALUES ('timescaledb-pg10', 'timescaledb', 'TimescaleDB', '', '', '', 'prod');
 INSERT INTO releases VALUES ('timescaledb-pg11', 'timescaledb', 'TimescaleDB', '', '', '', 'prod');
 
-INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'prod');
-
-INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'prod');
+INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'test');
+INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'test');
 
 INSERT INTO releases VALUES ('patroni', 'patroni',  '', '', '', '', 'test');
 INSERT INTO releases VALUES ('omnidb',  'omnidb',   '', '', '', '', 'test');
@@ -106,36 +100,32 @@ CREATE TABLE versions (
 INSERT INTO versions VALUES ('hub', '5.0.1', '', 1, '20191114', '');
 INSERT INTO versions VALUES ('hub', '5.0.0', '', 0, '20191003', '');
 
-INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 1, '20190808', '');
+INSERT INTO versions VALUES ('pg10', '10.11-1', 'linux64', 1, '20191114', '');
+INSERT INTO versions VALUES ('pg10', '10.10-1', 'linux64', 0, '20190808', '');
 
-INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 1, '20190808', '');
+INSERT INTO versions VALUES ('pg11', '11.6-1', 'linux64', 1, '20191114', '');
+INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 0, '20190808', '');
 
-INSERT INTO versions VALUES ('pg12', '12.0-1', 'linux64', 1, '20191003', '');
+INSERT INTO versions VALUES ('pg12', '12.1-1', 'linux64', 1, '20191114', '');
+INSERT INTO versions VALUES ('pg12', '12.0-1', 'linux64', 0, '20191003', '');
 
 INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003', 'pg10');
 
-INSERT INTO versions VALUES ('pgspock-pg10', '2.3.1-1',  'linux64', 1, '20191003', 'pg10');
-INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 1, '20191003', 'pg11');
+INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 0, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('pglogical-pg10', '2.2.2-1',  'linux64', 0, '20191003', 'pg10');
-INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 0, '20191003', 'pg11');
+INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 1, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
 
 INSERT INTO versions VALUES ('ddlx-pg11', '0.15-1', 'linux64', 1, '20191114', 'pg11');
-INSERT INTO versions VALUES ('ddlx-pg12', '0.15-1', 'linux64', 1, '20191114', 'pg12');
 
 INSERT INTO versions VALUES ('anon-pg11', '0.5.0-1', 'linux64', 1, '20191114', 'pg11');
-INSERT INTO versions VALUES ('anon-pg12', '0.5.0-1', 'linux64', 1, '20191114', 'pg12');
 
-INSERT INTO versions VALUES ('timescaledb-pg10', '1.5.0-1', 'linux64', 1, '20191114', 'pg10');
 INSERT INTO versions VALUES ('timescaledb-pg11', '1.5.0-1', 'linux64', 1, '20191114', 'pg11');
-INSERT INTO versions VALUES ('timescaledb-pg10', '1.4.2-1', 'linux64', 0, '20191003', 'pg10');
-INSERT INTO versions VALUES ('timescaledb-pg11', '1.4.2-1', 'linux64', 0, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 0, '20190808', 'pg11');
+INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 1, '20190808', 'pg11');
 
-INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 0, '20190708', 'pg11');
+INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 1, '20190708', 'pg11');
 
 
 INSERT INTO versions VALUES ('salt',    '2019pp', 'linux64', 0, '20190912', '');
