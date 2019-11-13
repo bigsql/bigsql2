@@ -64,7 +64,7 @@ INSERT INTO releases VALUES ('pg10', 'pg', 'PostgreSQL 10',  'PG Server (bigsql)
 INSERT INTO releases VALUES ('pg11', 'pg', 'PostgreSQL 11',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/11/', 'prod');
 INSERT INTO releases VALUES ('pg12', 'pg', 'PostgreSQL 12',  'PG Server (bigsql)', '', 'http://www.postgresql.org/docs/12/', 'prod');
 
-INSERT INTO releases VALUES ('pgtsql-pg10', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'prod');
+INSERT INTO releases VALUES ('pgtsql-pg11', 'pgtsql', 'pgTSQL', 'Transact SQL like', '', '', 'test');
 
 INSERT INTO releases VALUES ('pgspock-pg11', 'pgspock', 'pgSpock', 'Logical Bi-Directional Replication', '', '', 'prod');
 
@@ -109,7 +109,7 @@ INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 0, '20190808', '');
 INSERT INTO versions VALUES ('pg12', '12.1-1', 'linux64', 1, '20191114', '');
 INSERT INTO versions VALUES ('pg12', '12.0-1', 'linux64', 0, '20191003', '');
 
-INSERT INTO versions VALUES ('pgtsql-pg10', '2.0.2-1',  'linux64', 1, '20191003', 'pg10');
+INSERT INTO versions VALUES ('pgtsql-pg11', '3.0beta1-1',  'linux64', 1, '20191114', 'pg11');
 
 INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 0, '20191003', 'pg11');
 
