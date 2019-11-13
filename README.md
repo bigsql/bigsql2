@@ -6,8 +6,8 @@ Recipe for making the "Postgres by BigSQL" distro.
 ```
 sudo yum update -y
 sudo yum install -y git 
-sudo yum install -y net-tools zip unix2dos wget bzip2 python-pip
 sudo yum install -y epel-release
+sudo yum install -y net-tools zip unix2dos wget bzip2 python-pip
 sudo yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel
 
 ## Setup dev environment ####################################
