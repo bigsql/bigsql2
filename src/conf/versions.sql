@@ -109,7 +109,7 @@ INSERT INTO versions VALUES ('pg11', '11.5-1', 'linux64', 0, '20190808', '');
 INSERT INTO versions VALUES ('pg12', '12.1-1', 'linux64', 1, '20191114', '');
 INSERT INTO versions VALUES ('pg12', '12.0-1', 'linux64', 0, '20191003', '');
 
-INSERT INTO versions VALUES ('pgtsql-pg11', '3.0beta1-1',  'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('pgtsql-pg11', '3.0beta1-1',  'linux64', 1, '20191112', 'pg11');
 
 INSERT INTO versions VALUES ('pgspock-pg11', '2.3.1-1',  'linux64', 0, '20191003', 'pg11');
 
@@ -117,11 +117,12 @@ INSERT INTO versions VALUES ('pglogical-pg11', '2.2.2-1',  'linux64', 1, '201910
 
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1', 'linux64', 1, '20191003', 'pg11');
 
-INSERT INTO versions VALUES ('ddlx-pg11', '0.15-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('ddlx-pg11', '0.15-1', 'linux64', 1, '20191112', 'pg11');
 
-INSERT INTO versions VALUES ('anon-pg11', '0.5.0-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('anon-pg11', '0.5.0-1', 'linux64', 1, '20191112', 'pg11');
 
-INSERT INTO versions VALUES ('timescaledb-pg11', '1.5.0-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('timescaledb-pg11', '1.5.1-1', 'linux64', 1, '20191114', 'pg11');
+INSERT INTO versions VALUES ('timescaledb-pg11', '1.5.0-1', 'linux64', 0, '20191112', 'pg11');
 
 INSERT INTO versions VALUES ('cassandra_fdw-pg11', '3.1.4-1', 'linux64', 1, '20190808', 'pg11');
 
@@ -129,6 +130,6 @@ INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 1, '20190708
 
 
 INSERT INTO versions VALUES ('salt',    '2019pp', 'linux64', 0, '20190912', '');
-INSERT INTO versions VALUES ('omnidb',  '2.16-1', 'linux64', 0, '20191114', '');
-INSERT INTO versions VALUES ('patroni', '1.6.0',  'linux64', 0, '20191114', '');
+INSERT INTO versions VALUES ('omnidb',  '2.16-1', 'linux64', 0, '20191112', '');
+INSERT INTO versions VALUES ('patroni', '1.6.0',  'linux64', 0, '20191112', '');
 
