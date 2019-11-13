@@ -13,7 +13,7 @@ pg10BuildV=1
 ## these are built w/ pgbin-linux.sh command line options"
 bouncerV="1.12.0"
 odbcV="12.00.0000"
-backrestV="2.18"
+backrestV="2.19"
 
 hypopgFullV=1.1.3
 hypopgShortV=
@@ -138,7 +138,7 @@ hintplanFullVersion=1.3.2
 hintplanShortVersion=
 hintplanBuildV=1
 
-timescaledbFullVersion=1.5.0
+timescaledbFullVersion=1.5.1
 timescaledbShortVersion=
 timescaledbBuildV=1
 
