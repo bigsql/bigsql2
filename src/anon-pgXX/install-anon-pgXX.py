@@ -5,5 +5,5 @@
 
 import util
 
-util.create_extension("pgXX", "anon", True)
+util.create_extension("pgXX", "anon", True, True)
 

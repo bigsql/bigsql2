@@ -40,7 +40,7 @@ INSERT INTO projects VALUES ('athena_fdw',    2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('pglogical',     2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('timescaledb',   2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('ddlx',          2, 0,    'hub', 0, '', '');
-INSERT INTO projects VALUES ('anon',          2, 0,    'hub', 0, '', '');
+INSERT INTO projects VALUES ('anon',          2, 0,    'ddlx', 0, '', '');
 INSERT INTO projects VALUES ('pgspock',       2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('pgtsql',        2, 0,    'hub', 0, '', '');
 INSERT INTO projects VALUES ('omnidb',        3, 8000, 'hub', 0, '', '');
@@ -97,7 +97,8 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '5.0.1', '', 1, '20191114', '');
+INSERT INTO versions VALUES ('hub', '5.0.2', '', 1, '20191114', '');
+INSERT INTO versions VALUES ('hub', '5.0.1', '', 0, '20191112', '');
 INSERT INTO versions VALUES ('hub', '5.0.0', '', 0, '20191003', '');
 
 INSERT INTO versions VALUES ('pg10', '10.11-1', 'linux64', 1, '20191114', '');
