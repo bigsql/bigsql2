@@ -9,7 +9,6 @@ if ! [ -d "$pgHome" ]; then
 fi
 
 export PGHOME=$pgHome
-export PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 export PATH=$PGHOME/bin:$PATH
 
 echo "# PGHOME = $PGHOME"
