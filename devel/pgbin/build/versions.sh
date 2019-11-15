@@ -118,7 +118,7 @@ bulkLoadFullVersion=3.1.15
 bulkLoadShortVersion=
 bulkLoadBuildV=1
 
-pgLogicalFullV=2.2.2
+pgLogicalFullV=2.3.0
 pgLogicalShortV=
 pgLogicalBuildV=1
 
