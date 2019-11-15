@@ -57,6 +57,12 @@ export PATH=$PATH:$JAVA_HOME/bin
 sudo mkdir /opt/pgbin-build
 sudo chmod 777 /opt/pgbin-build
 sudo chown $USER:$USER /opt/pgbin-build
+
 mkdir /opt/pgbin-build/pgbin
 mkdir /opt/pgbin-build/pgbin/bin
+
+sudo mkdir /opt/pgcomponent
+sudo chmod 777 /opt/pgcomponent
+sudo chown $USER:$USER /opt/pgcomponent
+
 
