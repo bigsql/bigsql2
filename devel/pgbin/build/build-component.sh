@@ -361,7 +361,7 @@ function buildTDSFDWComponent {
 
 function buildTSQLComponent {
 
-	componentName="pgtsql$pgTSQLShortVersion-pg$pgShortVersion-$pgTSQLFullVersion-$pgTSQLBuildV-$buildOS"
+	componentName="pgtsql$pgTSQLShortV-pg$pgShortVersion-$pgTSQLFullV-$pgTSQLBuildV-$buildOS"
 	mkdir -p "$baseDir/$workDir/logs"
 	cd "$baseDir/$workDir"
 	mkdir pgtsql && tar -xf $tsqlSource --strip-components=1 -C pgtsql
@@ -1036,7 +1036,7 @@ function buildPGHintPlanComponent {
 
 function buildTimeScaleDBComponent {
 
-        componentName="timescaledb-pg$pgShortVersion-$timescaledbFullVersion-$timescaledbBuildV-$buildOS"
+        componentName="timescaledb-pg$pgShortVersion-$timescaledbFullV-$timescaledbBuildV-$buildOS"
         mkdir -p "$baseDir/$workDir/logs"
         cd "$baseDir/$workDir"
         pwd

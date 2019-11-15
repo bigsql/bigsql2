@@ -90,10 +90,10 @@ function checkPostgres {
 		pgSrcV=`$pgSrcDir/configure --version | head -1 | awk '{print $3}'`
 		if [[ "${pgSrcV/rc}" =~ ^12.* ]]; then
 			pgShortV="12"
-			pgLLVM="--with--llvm"
+			##pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^11.* ]]; then
 			pgShortV="11"
-			pgLLVM="--with--llvm"
+			##pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^10.* ]]; then
 			pgShortV="10"
 		else
@@ -181,17 +181,13 @@ function buildPostgres {
 	echo "#    configure @ $buildLocation"
 
 	conf="./configure --prefix=$buildLocation" 
-	conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
-	##conf="$conf --with-openssl --with-libxslt --with-libxml"
-	conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
+	##conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
+	conf="$conf --with-openssl --with-libxslt --with-libxml --with-python --with-perl"
+	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
 	##conf="$conf --with-uuid=ossp --with-python --with-perl"
-	conf="$conf --with-tcl --with-pam"
+	##conf="$conf --with-tcl --with-pam"
 	
-	if [ $pgShortV == "11" ] || [ $pgShortV == "12" ]; then
-		configCmnd="$conf --with-llvm"
-	else
-		configCmnd="$conf"
-	fi
+	configCmnd="$conf $pgLLVM"
 
 	export LD_LIBRARY_PATH=$sharedLibs
 	export LDFLAGS="-Wl,-rpath,'$sharedLibs' -L$sharedLibs"
@@ -368,6 +364,9 @@ function buildODBC {
 # This function adds the required libs to the build
 function copySharedLibs {
 	echo "# copySharedLibs()"
+
+	cp -pv $sharedLibs/* $buildLocation/lib/
+	return
 
 	cp $sharedLibs/libreadline.so.6 $buildLocation/lib/
 	cp $sharedLibs/libtermcap.so.2 $buildLocation/lib/
