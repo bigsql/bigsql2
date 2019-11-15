@@ -8,7 +8,7 @@ YUM="sudo yum -y install"
 $YUM python3
 
 $YUM readline zlib openssl
-$YUM readline-devel zlib-devel openssl-devel
+$YUM readline-devel zlib-devel openssl-devel python-devel
 
 $YUM libxml2 libxslt sqlite pam openldap
 $YUM libxml2-devel libxslt-devel sqlite-devel pam-devel openldap-devel
