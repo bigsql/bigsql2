@@ -9,27 +9,13 @@ echo "######################### pgbin-component.sh ######################"
 
 #set -x
 source ./versions.sh
-xml2Lib="/opt/gis-tools/libxml2"
-geosLib="/opt/gis-tools/geos-3.6.2"
-gdalLib="/opt/pgbin-build/pgbin/shared/linux_64/gdal"
-projLib="/opt/gis-tools/proj4"
-pcreLib="/opt/gis-tools/pcre-8.39"
-jsonLib="/opt/gis-tools/json-c"
+buildOS=OS
+echo "OS=$OS"
+buildNumber=1
 
 baseDir="`pwd`/.."
 workDir="comp`date +%Y%m%d_%H%M`"
 PGHOME=""
-
-
-buildNumber=1
-buildOS=`uname -s`
-if [[ $buildOS == "Linux" ]]; then
-	buildOS="linux64";
-elif [[ $buildOS == "Darwin" ]]; then
-	buildOS="osx64";
-elif [[ $buildOS == "MINGW64_NT-6.1" ]]; then
-	buildOS="win64";
-fi
 
 componentShortVersion=""
 componentFullVersion=""
@@ -85,24 +71,6 @@ function prepComponentBuildDir {
 		cp "$sharedLibs/$buildOS/lib/libuv.so.1" $buildLocation/lib/
 	fi
 
-	if [[ $buildPostGIS == "true" && ! ${buildLocation/postgis} == "$buildLocation" ]]; then
-	        cp $projLib/lib/libproj.so.9 $buildLocation/lib/
-	        cp $geosLib/lib/libgeos_c.so.1 $buildLocation/lib/
-	        cp $geosLib/lib/libgeos-3.6.2.so $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libfreexl.so.1 $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libsqlite3.so.0 $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libodbc.so.2 $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libodbcinst.so.2 $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libcurl.so.4 $buildLocation/lib/
-                cp $sharedLibs/$buildOS/lib/libexpat.so.1 $buildLocation/lib/
-                cp -R $gdalLib/lib/* $buildLocation/lib/
-                cp -R $gdalLib/share/* $buildLocation/share/
-                cp $gdalLib/bin/* $buildLocation/bin/
-	        cp $xml2Lib/lib/libxml2.so.2 $buildLocation/lib/
-                cp $pcreLib/lib/libpcre.so.1 $buildLocation/lib/
-                cp $jsonLib/lib/libjson-c.so.2 $buildLocation/lib/
-	fi
-
 	if [[ $buildTDSFDW == "true" && ! ${buildLocation/tds} == "$buildLocation" ]]; then
 		cp "$sharedLibs/$buildOS/lib/libsybdb.so.5" $buildLocation/lib/
 		cp "$sharedLibs/$buildOS/bin/tsql" $buildLocation/bin/
@@ -140,15 +108,6 @@ function  packageComponent {
 
 }
 
-# For postgis - Copy files from external dependencies. For example
-# Files from $projLib/share/proj should be copied to share/postgresql/contrib/postgis-2.4/proj
-function copyFilesFromExtDeps {
-        if [[ $buildPostGIS == "true" && ! ${buildLocation/postgis} == "$buildLocation" ]]; then
-                cd $buildLocation/share/postgresql/contrib/postgis-2.4
-                mkdir proj
-                cp $projLib/share/proj/* proj/
-        fi
-}
 
 function updateSharedLibs {
 
@@ -265,66 +224,6 @@ function buildPgBouncerComponent {
 	componentBundle=$componentName
 	cleanUpComponentDir $buildLocation
 	updateSharedLibs
-	packageComponent $componentBundle
-}
-
-function buildPostGISComponent {
-
-	componentName="postgis$postgisShortVersion-pg$pgShortVersion-$postgisFullVersion-$postgisBuildV-$buildOS"
-	mkdir -p "$baseDir/$workDir/logs"
-	cd "$baseDir/$workDir"
-	mkdir postgis && tar -xf $postGISSource --strip-components=1 -C postgis
-
-	buildLocation="$baseDir/$workDir/build/$componentName"
-
-	prepComponentBuildDir $buildLocation
-
-	PATH=$buildLocation/bin:$PATH
-        LD_RUN_PATH=$buildLocation/lib
-        export LD_LIBRARY_PATH=$sharedLibs:$buildLocation/lib
-
-	cd postgis
-        ./configure --prefix=$buildLocation --with-pgconfig=$buildLocation/bin/pg_config --with-pcredir=$pcreLib --with-geosconfig=$geosLib/bin/geos-config --with-projdir=$projLib --with-jsondir=$jsonLib --with-xml2config=$xml2Lib/bin/xml2-config --with-gdalconfig=$gdalLib/bin/gdal-config LDFLAGS=-Wl,-rpath,'$$ORIGIN'/../lib/ > $baseDir/$workDir/logs/postgis_configure.log 2>&1
-
-        if [[ $? -ne 0 ]]; then
-                echo "Postgis configure failed, check config.log for details ...."
-                return 1
-        fi
-
-        make > $baseDir/$workDir/logs/postgis_make.log 2>&1
-
-        if [[ $? -ne 0 ]]; then
-                echo "Postgis make failed, check logs ...."
-                return 1
-        fi
-
-        make install >  $baseDir/$workDir/logs/postgis_install.log 2>&1
-
-        if [[ $? -ne 0 ]]; then
-                echo "Failed to install Postgis, check logs .... "
-        else
-                echo "Postgis built & installed successfully .... "
-        fi
-
-	if [[ $postgisShortVersion -le 24 ]]; then
-		echo "Adding OGR FDW to Postgis 2.3+"
-		mkdir ogr && tar -xf /opt/pgbin-build/sources/ogr_fdw_v1.0.2.tar.gz --strip-components=1 -C ogr
-		cd ogr
-		export PATH=$PATH:/opt/gis-tools/gdal/bin
-		USE_PGXS=1 make > $baseDir/$workDir/logs/ogr_make.log 2>&1
-		if [[ $? -eq 0 ]]; then
-			make install > $baseDir/$workDir/logs/ogr_install.log 2>&1
-			if [[ $? -ne 0 ]]; then
-				echo "Failed to install OGR FDW, check logs for details ...."
-			fi
-		fi
-		
-	fi
-        unset LD_LIBRARY_PATH
-	componentBundle=$componentName
-	cleanUpComponentDir $buildLocation
-	updateSharedLibs
-	copyFilesFromExtDeps
 	packageComponent $componentBundle
 }
 

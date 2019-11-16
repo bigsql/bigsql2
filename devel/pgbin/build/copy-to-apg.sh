@@ -1,1 +1,4 @@
-cp -p *.sh $APG/devel/pgbin/build/.
+dir=$APG/devel/pgbin/build
+cp -p *.sh $dir/.
+cd $dir
+git diff
