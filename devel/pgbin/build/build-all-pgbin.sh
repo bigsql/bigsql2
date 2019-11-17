@@ -44,8 +44,10 @@ elif [ "$majorV" == "11" ]; then
 elif [ "$majorV" == "12" ]; then
   pgV=$pg12V
   pgBuildV=$pg12BuildV
+elif [ "$majorV" == "all" ]; then
+  echo "Hello ALL"
 else
-  echo "ERROR: must supply pg version of 10, 11 or 12"
+  echo "ERROR: must supply pg version of 10, 11, 12 or all"
   exit 1
 fi
 
@@ -72,18 +74,12 @@ cp /usr/lib64/libxml2.so.2.9.1      $shared_lib/libxml2.so
 cp /usr/lib64/libevent-2.0.so.5.1.9 $shared_lib/libevent-2.0.so.5
 cp /usr/local/lib/libgss.so.3       $shared_lib/.
 
-majorV="$1"
-if [ "$majorV" == "10" ]; then
-  minorV=$P10
-elif [ "$majorV" == "11" ]; then
-  minorV=$P11
-elif [ "$majorV" == "12" ]; then
-  minorV=$P12
+if [ "$majorV" == "all" ]; then
+  runPgBin "$binBld" "$pgSrc-$pg10V.tar.gz" "$pg10BuildV"
+  runPgBin "$binBld" "$pgSrc-$pg11V.tar.gz" "$pg11BuildV"
+  runPgBin "$binBld" "$pgSrc-$pg12V.tar.gz" "$pg12BuildV"
 else
-  echo "ERROR: must supply pg version of 10, 11 or 12"
-  exit 1
+  runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
 fi
 
-runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
-
-exit
+exit 0

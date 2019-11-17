@@ -2,13 +2,13 @@
 # Set build version for pgBin and components.
 
 pg12V="12.1"
-pg12BuildV=2
+pg12BuildV=1
 
 pg11V="11.6"
-pg11BuildV=2
+pg11BuildV=1
 
 pg10V="10.11"
-pg10BuildV=2
+pg10BuildV=1
 
 ## these are built w/ pgbin-linux.sh command line options"
 bouncerV="1.12.0"
@@ -152,17 +152,17 @@ pgAgentBuildV=1
 
 OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
-  OS="osx64";
+  OS=osx64
 elif [[ $OS == "MINGW64_NT-6.1" ]]; then
-  OS="win64";
+  OS=win64
 elif [[ $OS == "Linux" ]]; then
-  grep "CPU architecture:" /proc/cpuinfo 1>/dev/null
+  grep "CPU architecture: 8" /proc/cpuinfo 1>/dev/null
   rc=$?
   if [ "$rc" == "0" ]; then
-    OS="arm64"
+    OS=arm64
   else
-    OS="linux64";
+    OS=linux64
   fi
 else
-  OS="linux64"
+  OS=linux64
 fi

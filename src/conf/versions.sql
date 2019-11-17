@@ -101,14 +101,11 @@ INSERT INTO versions VALUES ('hub', '5.0.2', '', 1, '20191117', '');
 INSERT INTO versions VALUES ('hub', '5.0.1', '', 0, '20191112', '');
 INSERT INTO versions VALUES ('hub', '5.0.0', '', 0, '20191003', '');
 
-INSERT INTO versions VALUES ('pg10', '10.11-2', 'linux64, arm64', 1, '20191117', '');
-INSERT INTO versions VALUES ('pg10', '10.11-1', 'linux64', 0, '20191114', '');
+INSERT INTO versions VALUES ('pg10', '10.11-1', 'linux64, arm64', 1, '20191114', '');
 
-INSERT INTO versions VALUES ('pg11', '11.6-2', 'linux64, arm64', 1, '20191117', '');
-INSERT INTO versions VALUES ('pg11', '11.6-1', 'linux64', 0, '20191114', '');
+INSERT INTO versions VALUES ('pg11', '11.6-1',  'linux64, arm64', 1, '20191114', '');
 
-INSERT INTO versions VALUES ('pg12', '12.1-2', 'linux64, arm64', 1, '20191117', '');
-INSERT INTO versions VALUES ('pg12', '12.1-1', 'linux64', 0, '20191114', '');
+INSERT INTO versions VALUES ('pg12', '12.1-1',  'linux64, arm64', 1, '20191114', '');
 
 INSERT INTO versions VALUES ('pgtsql-pg11', '3.0beta1-1',  'linux64', 1, '20191112', 'pg11');
 
