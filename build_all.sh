@@ -14,9 +14,15 @@ elif [ "$majorV" == "11" ]; then
   minorV=$P11
 elif [ "$majorV" == "12" ]; then
   minorV=$P12
+elif [ "$majorV" == "all" ]; then
+  echo "Hello ALL"
 else
-  echo "ERROR: must supply pg version of 10, 11 or 12"
+  echo "ERROR: must supply pg version of 10, 11, 12 or all"
   exit 1
+fi
+
+if [ ! "$2" == "" ]; then
+  outDir="$2"
 fi
 
 if [ "$OUT" == "" ] || [ "$APG" == "" ]; then
@@ -31,7 +37,14 @@ buildALL () {
   echo ""
   echo "################## BUILD_ALL $bigV $fullV ###################"
 
-  buildONE $outDir $bigV $fullV $lin
+  if [ "$bigV" == "all" ]; then
+    buildONE $outDir "10" $P10
+    buildONE $outDir "11" $P11
+    buildONE $outDir "12" $P12
+  else
+    buildONE $outDir $bigV $fullV 
+  fi
+  
 }
 
 
@@ -55,7 +68,7 @@ buildONE () {
 }
 
 
-echo "############### Build Package Managers ##################"
+echo "############### Build Package Manager ###################"
 rm -f $OUT/hub-$hubV*
 rm -f $OUT/bigsql-apg-$hubV*
 ./build.sh -X posix   -c bigsql-apg -N $hubV

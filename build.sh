@@ -378,26 +378,32 @@ initPG () {
     exit 1
   fi
 
-  initDir "pg$pgM" "pg" "$pgV" "$plat" "postgres/pg$pgM" "Enabled" "5432" "nil"
+  if [ "$outDir" == "a64" ]; then
+    outPlat="arm64"
+  else
+    outPlat="linux64"
+  fi
+  initDir "pg$pgM" "pg" "$pgV" "$outPlat" "postgres/pg$pgM" "Enabled" "5432" "nil"
   supplementalPG "pg$pgM"
-  zipDir "pg$pgM" "$pgV" "$plat" "Enabled"
+  zipDir "pg$pgM" "$pgV" "$outPlat" "Enabled"
 
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
 
   #initC "patroni" "patroni" "$patroniV"  "$plat" "postgres/patroni" "" "" "nil"
 
-  ##if [ "$pgM" == "11" ]; then 
-    ##initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
+  if [ "$pgM" == "11" ]; then 
+    initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
+    initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
+    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
+    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
+    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
+    initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
+
     ##initC "pgspock-pg$pgM" "pgspock" "$spockV" "$plat" "postgres/spock" "" "" "nil"
-    ##initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
-    ##initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
-    ##initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
-    ##initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
-    ##initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
     ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
     ##initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
-  ##fi
+  fi
 }
 
 
