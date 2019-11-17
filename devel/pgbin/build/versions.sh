@@ -150,7 +150,6 @@ pgAgentFullVersion=4.0.0
 pgAgentShortVersion= 
 pgAgentBuildV=1
 
-
 OS=`uname -s`
 if [[ $OS == "Darwin" ]]; then
   OS="osx64";
@@ -160,7 +159,7 @@ elif [[ $OS == "Linux" ]]; then
   grep "CPU architecture:" /proc/cpuinfo 1>/dev/null
   rc=$?
   if [ "$rc" == "0" ]; then
-    OS="linux-arm64"
+    OS="arm64"
   else
     OS="linux64";
   fi

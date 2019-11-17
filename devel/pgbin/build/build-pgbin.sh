@@ -1,15 +1,12 @@
 #!/bin/bash
 #
-# This script generates a relocatable build for PostgreSQL and optionally includes
-#   building pgbouncer, psqlodbc, and pgbackrest
-#
-# The PostgreSQL build includes all the contrib modules, support for libreadline, 
-#   libz & openssl.
-#
-# The script requires OpenSSL, Libreadline, termcap, libz etc available under $sharedLibs
+# This script generates a relocatable build for BigSQL Postgres & optionall
+#   builds pgbouncer, psqlodbc, and pgbackrest
 #
 
 #set -x
+
+source versions.sh
 
 archiveDir="/opt/builds/"
 baseDir="`pwd`/.."
@@ -177,7 +174,7 @@ function buildPostgres {
 
 	cd $baseDir/$workDir/$pgSrcDir
 	mkdir -p $baseDir/$workDir/logs
-	buildLocation="$baseDir/$workDir/build/pg$pgShortV-$pgSrcV-$pgBldV-linux64"
+	buildLocation="$baseDir/$workDir/build/pg$pgShortV-$pgSrcV-$pgBldV-$OS"
 	echo "#    configure @ $buildLocation"
 
 	conf="./configure --prefix=$buildLocation" 
@@ -365,7 +362,7 @@ function buildODBC {
 function copySharedLibs {
 	echo "# copySharedLibs()"
 
-	cp -pv $sharedLibs/* $buildLocation/lib/
+	cp -p $sharedLibs/* $buildLocation/lib/
 	return
 
 	cp $sharedLibs/libreadline.so.6 $buildLocation/lib/
@@ -434,10 +431,13 @@ function createBundle {
 	Tar="pg$pgShortV-$pgSrcV-$pgBldV-linux$osArch"
 	Cmd="tar -cjf $Tar.tar.bz2 $Tar pg$pgShortV-$pgSrcV-$pgBldV-linux$osArch" 
 	echo "#    $Cmd"
-        $Cmd >> $baseDir/$workDir/logs/tar.log 2>&1
+	tar_log=$baseDir/$workDir/logs/tar.log
+        $Cmd >> $tar_log 2>&1
 	if [[ $? -ne 0 ]]; then
 		echo "Unable to create tar for $buildLocation, check logs .... "
-		return
+		echo "tar_log=$tar_log"
+		cat $tar_log
+		return 1
 	else
 		mkdir -p $archiveDir/$workDir
 		mv "$Tar.tar.bz2" $archiveDir/$workDir/
@@ -450,7 +450,7 @@ function createBundle {
 	fi
 	tarFile="$archiveDir/$workDir/$Tar.tar.bz2"
 	echo "#    tarFile=$tarFile"
-	return
+	return 0
 }
 
 function checkCmd {
@@ -571,7 +571,6 @@ echo "###"
 isPassed "$archiveLocationPassed" "Target build location (-a)"
 isPassed "$sourceTarPassed" "Postgres source tarball (-t)"
 
-echo "#"	
 checkCmd "checkPostgres"
 checkCmd "buildPostgres"
 
@@ -590,6 +589,8 @@ fi
 checkCmd "copySharedLibs"
 checkCmd "updateSharedLibPaths"
 checkCmd "createBundle"
+rc=$?
+echo "# rc=$rc"
 
 endTime=`date +%Y-%m-%d_%H:%M:%S`
 echo "### end at $endTime"

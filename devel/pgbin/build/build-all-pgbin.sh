@@ -6,13 +6,13 @@ binBld=/opt/pgbin-build/builds
 source ./versions.sh
 
 function runPgBin {
-  echo "#"
+  ##echo "#"
   pOutDir=$1
-  echo "# outDir = $pOutDir"
+  ##echo "# outDir = $pOutDir"
   pPgSrc=$2
-  echo "# pPgSrc = $pPgSrc"
+  ##echo "# pPgSrc = $pPgSrc"
   pBldV=$3
-  echo "#   BldV = $pBldV"
+  ##echo "#   BldV = $pBldV"
 
   bncrSrc=$SRC/pgbouncer-$bouncerV.tar.gz
   odbcSrc=$SRC/psqlodbc-$odbcV.tar.gz
@@ -83,7 +83,7 @@ else
   echo "ERROR: must supply pg version of 10, 11 or 12"
   exit 1
 fi
-echo "###  build-all-pgbin.sh"
+echo "###  build-all-pgbin.sh ###"
 runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
 
 exit
