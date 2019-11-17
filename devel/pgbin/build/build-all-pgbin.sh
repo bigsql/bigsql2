@@ -83,7 +83,7 @@ else
   echo "ERROR: must supply pg version of 10, 11 or 12"
   exit 1
 fi
-echo "###  build-all-pgbin.sh ###"
+
 runPgBin "$binBld" "$pgSrc-$pgV.tar.gz" "$pgBuildV"
 
 exit

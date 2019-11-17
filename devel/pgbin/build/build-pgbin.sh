@@ -428,8 +428,8 @@ function createBundle {
 	bldDir="$baseDir/$workDir/build"
 	cd $bldDir
 	echo "#    $bldDir"
-	Tar="pg$pgShortV-$pgSrcV-$pgBldV-linux$osArch"
-	Cmd="tar -cjf $Tar.tar.bz2 $Tar pg$pgShortV-$pgSrcV-$pgBldV-linux$osArch" 
+	Tar="pg$pgShortV-$pgSrcV-$pgBldV-$OS"
+	Cmd="tar -cjf $Tar.tar.bz2 $Tar pg$pgShortV-$pgSrcV-$pgBldV-$OS" 
 	echo "#    $Cmd"
 	tar_log=$baseDir/$workDir/logs/tar.log
         $Cmd >> $tar_log 2>&1
@@ -502,10 +502,7 @@ if [[ $# -lt 1 ]]; then
 	exit 1
 fi
 
-startTime=`date +%Y-%m-%d_%H:%M:%S`
-osName=`uname`
-echo "#"
-echo "### $scriptName for $osName @ $startTime ###"
+echo "### $scriptName ###"
 
 while getopts "t:a:b:k:o:n:h" opt; do
 	case $opt in

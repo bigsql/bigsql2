@@ -5,9 +5,9 @@
 
 hubV=5.0.2
 
-P12=12.1-1
+P12=12.1-2
 P11=11.6-2
-P10=10.11-1
+P10=10.11-2
 
 anonV=0.5.0-1
 ddlxV=0.15-1
@@ -29,5 +29,24 @@ zipOut="off"
 isENABLED=false
 
 pg="postgres"
-outDir=l64
-plat=linux64
+
+OS=`uname -s`
+if [[ $OS == "Darwin" ]]; then
+  OS=osx64;
+  outDir=m64
+elif [[ $OS == "MINGW64_NT-6.1" ]]; then
+  OS=win64;
+  outDir=w64
+elif [[ $OS == "Linux" ]]; then
+  grep "CPU architecture:" /proc/cpuinfo 1>/dev/null
+  rc=$?
+  if [ "$rc" == "0" ]; then
+    OS=arm64
+    outDir=a64
+  else
+    OS=linux64;
+    outDir=l64
+  fi
+fi
+
+plat=$OS

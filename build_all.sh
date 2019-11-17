@@ -31,7 +31,7 @@ buildALL () {
   echo ""
   echo "################## BUILD_ALL $bigV $fullV ###################"
 
-  buildONE l64 $bigV $fullV $lin
+  buildONE $outDir $bigV $fullV $lin
 }
 
 
