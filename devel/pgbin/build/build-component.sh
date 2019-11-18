@@ -1,12 +1,7 @@
 #!/bin/bash
 
-echo "######################### build-component.sh ######################"
-# 
-# Use this script to create components/extensions for pgBin
-# The script needs pgBin binaries, component source and an output dir.
-#
+## set -x
 
-#set -x
 source ./versions.sh
 buildOS=$OS
 buildNumber=1
@@ -98,11 +93,11 @@ function cleanUpComponentDir {
 
 function  packageComponent {
 
+	echo "  $targetDir/$workDir/$componentBundle.tar.bz2"
 	cd "$baseDir/$workDir/build/"
 	tar -cjf "$componentBundle.tar.bz2" $componentBundle
 	mkdir -p "$targetDir/$workDir"
 	mv "$componentBundle.tar.bz2" "$targetDir/$workDir/"
-	echo "#     outFile: $targetDir/$workDir/$componentBundle.tar.bz2"
 
 }
 
@@ -413,18 +408,18 @@ function buildPGPartmanComponent {
 
 function buildComp {
 	comp="$1"
-        echo "#        comp: $comp"
+        ##echo "#        comp: $comp"
         shortV="$2"
-        echo "#      shortV: $shortV"
+        ##echo "#      shortV: $shortV"
         fullV="$3"
-        echo "#       fullV: $fullV"
+        ##echo "#       fullV: $fullV"
         buildV="$4"
-        echo "#      buildV: $buildV"
+        ##echo "#      buildV: $buildV"
         src="$5"
-        echo "#         src: $src"
+        ##echo "#         src: $src"
 
         componentName="$comp$shortV-pg$pgShortVersion-$fullV-$buildV-$buildOS"
-        echo "#      compNm: $componentName"
+        ##echo "#      compNm: $componentName"
         mkdir -p "$baseDir/$workDir/logs"
         cd "$baseDir/$workDir"
         mkdir $comp  && tar -xf $src --strip-components=1 -C $comp
@@ -437,11 +432,11 @@ function buildComp {
 
         PATH=$buildLocation/bin:$PATH
         log_dir="$baseDir/$workDir/logs"
-        echo "#     log_dir: $log_dir"
+        ##echo "#     log_dir: $log_dir"
         make_log="$log_dir/$comp-make.log"
-        echo "#    make_log: $make_log"
+        ##echo "#    make_log: $make_log"
         install_log="$log_dir/$comp-install.log"
-        echo "# install_log: $install_log"
+        ##echo "# install_log: $install_log"
 
         if [ "$comp" == "athena_fdw" ]; then
            buildLib=$buildLocation/lib
@@ -469,7 +464,6 @@ function buildComp {
         cleanUpComponentDir $buildLocation
         updateSharedLibs
         packageComponent $componentBundle
-	echo "#########################################################"
 }
 
 
@@ -936,15 +930,12 @@ function buildTimeScaleDBComponent {
         componentName="timescaledb-pg$pgShortVersion-$timescaledbFullV-$timescaledbBuildV-$buildOS"
         mkdir -p "$baseDir/$workDir/logs"
         cd "$baseDir/$workDir"
-        pwd
         mkdir timescaledb && tar -xf $timescaleDBSource --strip-components=1 -C timescaledb
         cd timescaledb
 
-        echo "buildLocation=$baseDir/$workDir/build/$componentName"
         buildLocation="$baseDir/$workDir/build/$componentName"
 
         prepComponentBuildDir $buildLocation
-
 
         PATH=/opt/pgbin-build/pgbin/bin:$buildLocation/bin:$PATH
 
@@ -1035,7 +1026,6 @@ if [[ $pgBinPassed != "true" ]]; then
 	echo "Please provide a valid PostgreSQL version to build ..."
 	exit 1
 fi
-echo "#       pgBin: $pgBin"
 
 getPGVersion
 
@@ -1166,6 +1156,5 @@ fullDestDir=/opt/pgbin-builds/$destDir
 #ssh build@$pgcentral "mkdir -p $fullDestDir"
 #scp $targetDir/$workDir/$componentBundle.tar.bz2 build@$pgcentral:$fullDestDir/
 
-echo Goodbye!
 exit 0
 
