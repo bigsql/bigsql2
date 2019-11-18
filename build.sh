@@ -390,7 +390,7 @@ initPG () {
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
 
-  #initC "patroni" "patroni" "$patroniV"  "$plat" "postgres/patroni" "" "" "nil"
+  initC "patroni" "patroni" "$patroniV"  "" "postgres/patroni" "" "" "nil"
 
   if [ "$pgM" == "11" ]; then 
     initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"

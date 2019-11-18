@@ -81,7 +81,7 @@ INSERT INTO releases VALUES ('timescaledb-pg11', 'timescaledb', 'TimescaleDB', '
 INSERT INTO releases VALUES ('cassandra_fdw-pg11', 'cassandra_fdw', 'CassandraFDW', 'C* Interoperability', '', '', 'test');
 INSERT INTO releases VALUES ('athena_fdw-pg11', 'athena_fdw', 'AthenaFDW', 'Hive Queries', '', '', 'test');
 
-INSERT INTO releases VALUES ('patroni', 'patroni',  '', '', '', '', 'test');
+INSERT INTO releases VALUES ('patroni', 'patroni',  '', '', '', '', 'prod');
 INSERT INTO releases VALUES ('omnidb',  'omnidb',   '', '', '', '', 'test');
 INSERT INTO releases VALUES ('salt',    'salt',     '', '', '', '', 'test');
 
@@ -129,5 +129,5 @@ INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2', 'linux64', 1, '20190708
 
 INSERT INTO versions VALUES ('salt',    '2019pp', 'linux64', 0, '20190912', '');
 INSERT INTO versions VALUES ('omnidb',  '2.16-1', 'linux64', 0, '20191112', '');
-INSERT INTO versions VALUES ('patroni', '1.6.0',  'linux64', 0, '20191112', '');
+INSERT INTO versions VALUES ('patroni', '1.6.1',  '',        1, '20191118', '');
 
