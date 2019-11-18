@@ -18,6 +18,10 @@ if [ "$1" == "pgtsql" ] || [ "$1" == "all" ]; then
   build pgtsql $pgTSQLFullV
 fi
 
+if [ "$1" == "plprofiler" ] || [ "$1" == "all" ]; then
+  build plprofiler $plProfilerFullVersion
+fi
+
 if [ "$1" == "timescaledb" ] || [ "$1" == "all" ]; then
   build timescaledb $timescaledbFullV
 fi
