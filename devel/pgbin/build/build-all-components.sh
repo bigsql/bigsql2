@@ -24,4 +24,12 @@ if [ "$1" == "pglogical" ] || [ "$1" == "all" ]; then
   build pglogical $pgLogicalFullV
 fi
 
+if [ "$1" == "anon" ] || [ "$1" == "all" ]; then
+  build anon $anonFullV
+fi
+
+if [ "$1" == "ddlx" ] || [ "$1" == "all" ]; then
+  build ddlx $ddlxFullV
+fi
+
 exit 0

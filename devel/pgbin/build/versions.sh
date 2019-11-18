@@ -76,12 +76,10 @@ debugFullV=1.1
 debugShortV=
 debugBuildV=3
 
-#fixeddecimal
 fdFullV=1.1.0
 fdShortV=
 fdBuildV=1
 
-#postgresql_anonymizer
 anonFullV=0.5.0
 anonShortV=
 anonBuildV=1
