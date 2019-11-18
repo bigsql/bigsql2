@@ -1,7 +1,6 @@
 #!/bin/bash
 
-echo ""
-echo "######################### pgbin-component.sh ######################"
+echo "######################### build-component.sh ######################"
 # 
 # Use this script to create components/extensions for pgBin
 # The script needs pgBin binaries, component source and an output dir.
@@ -9,8 +8,7 @@ echo "######################### pgbin-component.sh ######################"
 
 #set -x
 source ./versions.sh
-buildOS=OS
-echo "OS=$OS"
+buildOS=$OS
 buildNumber=1
 
 baseDir="`pwd`/.."
