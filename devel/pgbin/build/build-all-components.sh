@@ -4,6 +4,8 @@ source versions.sh
 
 function build {
   bin11="--with-pgbin /opt/pgcomponent/pg11"
+  echo ""
+  echo "###################################"
   echo "$1 $2"
   ./build-component.sh --build-$1 $SRC/$1-$2.tar.gz $bin11
   rc=$?

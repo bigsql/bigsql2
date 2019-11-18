@@ -395,10 +395,10 @@ initPG () {
   if [ "$pgM" == "11" ]; then 
     initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
     initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
-    #initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
+    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
     initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
-    #initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
-    #initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
+    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
+    initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
 
     ##initC "pgspock-pg$pgM" "pgspock" "$spockV" "$plat" "postgres/spock" "" "" "nil"
     ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"

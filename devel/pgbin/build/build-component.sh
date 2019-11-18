@@ -1,6 +1,6 @@
 #!/bin/bash
 
-## set -x
+# set -x
 
 source ./versions.sh
 buildOS=$OS
@@ -92,8 +92,8 @@ function cleanUpComponentDir {
 }
 
 function  packageComponent {
+	echo "$targetDir/$workDir/$componentBundle.tar.bz2"
 
-	echo "  $targetDir/$workDir/$componentBundle.tar.bz2"
 	cd "$baseDir/$workDir/build/"
 	tar -cjf "$componentBundle.tar.bz2" $componentBundle
 	mkdir -p "$targetDir/$workDir"
@@ -118,7 +118,8 @@ function updateSharedLibs {
 
         if [[ -d "$buildLocation/lib/postgresql" ]]; then
                 cd $buildLocation/lib/postgresql
-		for file in `dir -d *so*` ; do
+		for file in `dir -d *so* 2>/dev/null` ; do
+			ls -sh $file
              		chrpath -r "\${ORIGIN}/../../lib" "$file" >> $baseDir/$workDir/logs/libPath.log 2>&1
 		done
         fi
