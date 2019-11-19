@@ -31,7 +31,7 @@ printUsageMessage () {
   echo "#--------------------------------------------------------#"
   echo "# -p $P12  $P11  $P10  cassandra_fdw-$cstarV"
   echo "#    timescale-$timescaleV  athenafdw-$athenafdwV"
-  echo "#    anon-$anonV  ddlx-$ddlxV"
+  echo "#    anon-$anonV  ddlx-$ddlxV  hypopg-$hypoV"
   echo "#    plprofiler-$profV  pgtsql-$tsqlV  patroni-$patroniV"
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
@@ -206,6 +206,7 @@ initDir () {
   copy-pgXX "athena_fdw"
   copy-pgXX "plprofiler"
   copy-pgXX "pgtsql"
+  copy-pgXX "hypopg"
 
   if [ -f $myNewDir/LICENSE.TXT ]; then
     mv $myNewDir/LICENSE.TXT $myNewDir/$pComponent-LICENSE.TXT
@@ -393,6 +394,7 @@ initPG () {
   initC "patroni" "patroni" "$patroniV"  "" "postgres/patroni" "" "" "nil"
 
   if [ "$pgM" == "11" ]; then 
+    initC "hypopg-pg$pgM" "hypopg" "$hypoV" "$plat" "postgres/hypopg" "" "" "nil"
     initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
     initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"

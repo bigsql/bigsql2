@@ -14,6 +14,10 @@ function build {
 
 ################### MAINLINE #####################
 
+if [ "$1" == "hypopg" ] || [ "$1" == "all" ]; then
+  build hypopg $hypopgFullV
+fi
+
 if [ "$1" == "pgtsql" ] || [ "$1" == "all" ]; then
   build pgtsql $pgTSQLFullV
 fi
