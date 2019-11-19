@@ -23,6 +23,9 @@ patroniV=1.6.1
 saltV=2019pp
 pipV=19pp
 
+mysqlV=8.0.18-1
+mysqlfdwV=2.0.5-1
+
 HUB="$PWD"
 SRC="$HUB/src"
 zipOut="off"

@@ -22,6 +22,10 @@ if [ "$1" == "plprofiler" ] || [ "$1" == "all" ]; then
   build plprofiler $plProfilerFullVersion
 fi
 
+if [ "$1" == "cassandra_fdw" ] || [ "$1" == "all" ]; then
+  build cassandra_fdw $cassandraFDWFullVersion
+fi
+
 if [ "$1" == "timescaledb" ] || [ "$1" == "all" ]; then
   build timescaledb $timescaledbFullV
 fi

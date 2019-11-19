@@ -984,7 +984,7 @@ while true; do
     --build-postgis ) buildPostGIS=true; postGISSource=$2;shift; shift ;;
     --build-bouncer ) buildBouncer=true; Source=$2; shift; shift; ;;
     --build-athena ) buildAthena=true; Source=$2; shift; shift ;;
-    --build-cassandra-fdw ) buildCassandraFDW=true; cassandraFDWSource=$2; shift; shift ;;
+    --build-cassandra_fdw ) buildCassandraFDW=true; cassandraFDWSource=$2; shift; shift ;;
     --build-pgtsql ) buildTSQL=true; tsqlSource=$2; shift; shift ;;
     --build-tds-fdw ) buildTDSFDW=true; tdsFDWSource=$2; shift; shift ;;
     --build-mongo-fdw ) buildMongoFDW=true mongoFDWSource=$2; shift; shift ;;

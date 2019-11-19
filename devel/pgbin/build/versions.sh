@@ -108,7 +108,7 @@ plV8FullVersion=1.4.8
 plV8ShortVersion=14
 plV8BuildV=1
 
-pgTSQLFullV=3.0beta1
+pgTSQLFullV=3.0
 pgTSQLShortV=
 pgTSQLBuildV=1
 
