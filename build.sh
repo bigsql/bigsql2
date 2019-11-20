@@ -384,6 +384,7 @@ initPG () {
   else
     outPlat="linux64"
   fi
+
   initDir "pg$pgM" "pg" "$pgV" "$outPlat" "postgres/pg$pgM" "Enabled" "5432" "nil"
   supplementalPG "pg$pgM"
   zipDir "pg$pgM" "$pgV" "$outPlat" "Enabled"
@@ -394,13 +395,13 @@ initPG () {
   initC "patroni" "patroni" "$patroniV"  "" "postgres/patroni" "" "" "nil"
 
   if [ "$pgM" == "11" ]; then 
-    initC "hypopg-pg$pgM" "hypopg" "$hypoV" "$plat" "postgres/hypopg" "" "" "nil"
-    initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$plat" "postgres/logical" "" "" "nil"
-    initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$plat" "postgres/timescale" "" "" "nil"
-    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$plat" "postgres/profiler" "" "" "nil"
-    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$plat" "postgres/tsql" "" "" "nil"
-    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$plat" "postgres/ddlx" "" "" "nil"
-    initC "anon-pg$pgM" "anon" "$anonV" "$plat" "postgres/anon" "" "" "nil"
+    initC "hypopg-pg$pgM" "hypopg" "$hypoV" "$outPlat" "postgres/hypopg" "" "" "nil"
+    initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$outPlat" "postgres/logical" "" "" "nil"
+    initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$outPlat" "postgres/timescale" "" "" "nil"
+    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$outPlat" "postgres/profiler" "" "" "nil"
+    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$outPlat" "postgres/tsql" "" "" "nil"
+    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$outPlat" "postgres/ddlx" "" "" "nil"
+    initC "anon-pg$pgM" "anon" "$anonV" "$outPlat" "postgres/anon" "" "" "nil"
 
     ##initC "pgspock-pg$pgM" "pgspock" "$spockV" "$plat" "postgres/spock" "" "" "nil"
     ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
