@@ -180,6 +180,7 @@ function buildPostgres {
 	conf="./configure --prefix=$buildLocation" 
 	##conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
 	conf="$conf --with-openssl --with-libxslt --with-libxml --with-python --with-perl"
+	conf="$conf --disable-rpath"
 	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
 	##conf="$conf --with-uuid=ossp --with-python --with-perl"
 	##conf="$conf --with-tcl --with-pam"
@@ -361,35 +362,8 @@ function buildODBC {
 # This function adds the required libs to the build
 function copySharedLibs {
 	echo "# copySharedLibs()"
-
 	cp -p $sharedLibs/* $buildLocation/lib/
 	return
-
-	cp $sharedLibs/libreadline.so.6 $buildLocation/lib/
-	cp $sharedLibs/libtermcap.so.2 $buildLocation/lib/
-	cp $sharedLibs/libz.so.1 $buildLocation/lib/
-	cp $sharedLibs/libssl.so.1.0.0 $buildLocation/lib/
-	cp $sharedLibs/libcrypto.so.1.0.0 $buildLocation/lib/
-	cp $sharedLibs/libk5crypto.so.3 $buildLocation/lib/
-	cp $sharedLibs/libkrb5support.so.0 $buildLocation/lib/
-	cp $sharedLibs/libgssapi_krb5.so.2 $buildLocation/lib/
-	cp $sharedLibs/libk5crypto.so $buildLocation/lib/
-	cp $sharedLibs/libkrb5support.so $buildLocation/lib/
-	cp $sharedLibs/libkrb5.so.3 $buildLocation/lib/
-	cp $sharedLibs/libcom_err.so.3 $buildLocation/lib/
-	cp $sharedLibs/libxslt.so.1 $buildLocation/lib/
-	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
-	cp $sharedLibs/libldap-2.4.so.2 $buildLocation/lib/
-	cp $sharedLibs/libldap_r-2.4.so.2 $buildLocation/lib/
-	cp $sharedLibs/liblber-2.4.so.2 $buildLocation/lib/
-	cp $sharedLibs/libsasl2.so.3 $buildLocation/lib/
-	cp $sharedLibs/libxml2.so* $buildLocation/lib/
-	cp $sharedLibs/libevent-2.0.so.5 $buildLocation/lib/
-        cp $sharedLibs/libgss.so.3 $buildLocation/lib/
-
-	cp $sharedLibs/libuuid.so.16 $buildLocation/lib/
-	chmod 755 $buildLocation/lib/libuuid.so.16
-
 }
 
 function updateSharedLibPaths {
