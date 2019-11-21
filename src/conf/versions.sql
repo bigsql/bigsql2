@@ -73,6 +73,7 @@ INSERT INTO releases VALUES ('pgspock-pg11', 'pgspock', 'pgSpock', 'Logical Bi-D
 
 INSERT INTO releases VALUES ('pglogical-pg11', 'pglogical', 'pgLogical', 'Logical Replication', '', '', 'prod');
 
+INSERT INTO releases VALUES ('plprofiler-pg12', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
 INSERT INTO releases VALUES ('plprofiler-pg11', 'plprofiler', 'plProfiler', 'Procedural Language Performance Profiler', '', 'https://github.com/bigsql/plprofiler', 'prod');
 
 INSERT INTO releases VALUES ('ddlx-pg11', 'ddlx', 'DDL Extractor', '', '', '', 'prod');
@@ -118,6 +119,7 @@ INSERT INTO versions VALUES ('pgtsql-pg11', '3.0-1',          'linux64, arm64', 
 
 INSERT INTO versions VALUES ('pglogical-pg11', '2.3.0-1',     'linux64, arm64', 1, '20191119', 'pg11');
 
+INSERT INTO versions VALUES ('plprofiler-pg12', '4.1-1',      'linux64, arm64', 1, '20191121', 'pg12');
 INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1',      'linux64, arm64', 1, '20191119', 'pg11');
 
 INSERT INTO versions VALUES ('ddlx-pg11', '0.15-1',           'linux64, arm64', 1, '20191119', 'pg11');

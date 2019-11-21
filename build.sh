@@ -395,6 +395,10 @@ initPG () {
 
   initC "patroni" "patroni" "$patroniV"  "" "postgres/patroni" "" "" "nil"
 
+  if [ "$pgM" == "12" ]; then 
+    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$outPlat" "postgres/profiler" "" "" "nil"
+  fi
+
   if [ "$pgM" == "11" ]; then 
     initC "hypopg-pg$pgM" "hypopg" "$hypoV" "$outPlat" "postgres/hypopg" "" "" "nil"
     initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$outPlat" "postgres/logical" "" "" "nil"
