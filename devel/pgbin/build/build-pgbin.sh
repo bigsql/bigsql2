@@ -85,10 +85,10 @@ function checkPostgres {
 		pgSrcV=`$pgSrcDir/configure --version | head -1 | awk '{print $3}'`
 		if [[ "${pgSrcV/rc}" =~ ^12.* ]]; then
 			pgShortV="12"
-			##pgLLVM="--with--llvm"
+			pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^11.* ]]; then
 			pgShortV="11"
-			##pgLLVM="--with--llvm"
+			pgLLVM="--with--llvm"
 		elif [[ "${pgSrcV/rc}" =~ ^10.* ]]; then
 			pgShortV="10"
 		else
@@ -175,7 +175,7 @@ function buildPostgres {
 	buildLocation="$baseDir/$workDir/build/pg$pgShortV-$pgSrcV-$pgBldV-$OS"
 
 	conf="$conf --with-openssl --with-libxslt --with-libxml --with-python --with-perl"
-	conf="$conf --disable-rpath"
+	conf="$conf --disable-rpath $pgLLVM"
 	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
 	##conf="$conf --with-uuid=ossp --with-python --with-perl --with-ldap"
 	##conf="$conf --with-tcl --with-pam"
