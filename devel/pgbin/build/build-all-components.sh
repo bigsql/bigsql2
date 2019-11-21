@@ -4,9 +4,13 @@ source versions.sh
 
 function build {
   pgbin="--with-pgbin /opt/pgcomponent/pg$pgV"
+  pgver="--with-pgver $3"
+  src="$SRC/$1-$2.tar.gz"
   echo ""
   echo "###################################"
-  ./build-component.sh --build-$1 $SRC/$1-$2.tar.gz $pgbin $3
+  cmd="./build-component.sh --build-$1 $src $pgbin $pgver $copyBin $4"
+  ## echo "cmd=$cmd"
+  $cmd
   rc=$?
 }
 
@@ -14,6 +18,10 @@ function build {
 ################### MAINLINE #####################
 
 pgV="$2"
+copyBin="$3"
+if [ "$copyBin" == "" ]; then
+  copyBin="--no-copy-bin"
+fi
 if [ ! "$pgV"  == "11" ] && [ ! "$pgV"  == "12" ]; then
   echo  "ERROR: second parm must be 11 or 12"
   exit 1
@@ -40,7 +48,7 @@ if [ "$1" == "timescaledb" ] || [ "$1" == "all" ]; then
 fi
 
 if [ "$1" == "pglogical" ] || [ "$1" == "all" ]; then
-  build pglogical $pgLogicalFullV $2 pglogical
+  build pglogical $pgLogicalFullV $2 logical
 fi
 
 if [ "$1" == "anon" ] || [ "$1" == "all" ]; then

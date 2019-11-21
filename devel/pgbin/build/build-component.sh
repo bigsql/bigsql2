@@ -103,7 +103,7 @@ function  packageComponent {
 	mv "$componentBundle.tar.bz2" "$targetDir/$workDir/"
 
 	if [ "$copyBin" == "true" ]; then
-		cp -pv $bundle $IN/postgres/$copyTo
+		cp -pv $bundle $IN/postgres/$compDir/$copyTo
 	fi
 
 }
@@ -976,7 +976,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l copy-bin,with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
+TEMP=`getopt -l copy-bin,no-copy-bin,with-pgver:,with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -985,8 +985,13 @@ fi
 
 #eval set -- "$TEMP"
 copyBin=false
+compDir="$8"
+
+##echo "XXX $1 $2 $3 $4 $5 $6 $7 $8"
+
 while true; do
   case "$1" in
+    --with-pgver ) pgVer=$2; shift; shift; ;;
     --with-pgbin ) pgBinPassed=true; pgBin=$2; shift; shift; ;;
     --target-dir ) targetDirPassed=true; targetDir=$2; shift; shift; ;;
     --build-postgis ) buildPostGIS=true; postGISSource=$2;shift; shift ;;
@@ -1026,6 +1031,7 @@ while true; do
     --build-ddlx ) buildDdlx=true; Source=$2; shift; shift ;;
     --build-number ) buildNumber=$2; shift; shift ;;
     --copy-bin ) copyBin=true; copyTo=$2; shift; shift; ;;
+    --no-copy-bin ) copyBin=false; copyTo=$2; shift; shift; ;;
     -- ) shift; break ;;
     -* ) echo "Invalid Option Passed"; exit 1; ;;
     * ) break ;;
