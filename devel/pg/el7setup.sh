@@ -12,7 +12,7 @@ $YUM pam-devel openldap-devel uuid-devel python-devel
 $YUM llvm-devel clang-devel protobuf-c-devel chrpath
 
 $YUM docbook-dtds docbook-style-dsssl docbook-style-xsl mkdocs highlight
-$YUM perl-ExtUtils-Embed libevent-devel tcl-devel postgresql-devel
+$YUM perl-ExtUtils-Embed libevent-devel tcl-devel
 
 $YUM centos-release-scl
 $YUM llvm-toolset-7 llvm-toolset-7-llvm-devel.x86_64
