@@ -9,9 +9,9 @@ elif [ "$1" == "11" ]; then
   ./apg install pgtsql-pg11 -d demo; ./apg status
   ./apg install anon-pg11 -d demo; ./apg status
   ./apg install timescaledb-pg11 -d demo; ./apg status
-  ./apg install pglogical-pg11 -d demo; ./apg status
   ./apg install plprofiler-pg11 -d demo; ./apg status
   ./apg install hypopg-pg11 -d demo; ./apg status
+  ./apg install pglogical-pg11 -d demo; ./apg status
 
 elif [ "$1" == "10" ]; then
   source bp.sh
