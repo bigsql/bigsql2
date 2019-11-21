@@ -2,13 +2,13 @@
 # Set build version for pgBin and components.
 
 pg12V="12.1"
-pg12BuildV=1
+pg12BuildV=2
 
 pg11V="11.6"
-pg11BuildV=1
+pg11BuildV=2
 
 pg10V="10.11"
-pg10BuildV=1
+pg10BuildV=2
 
 ## these are built w/ pgbin-linux.sh command line options"
 bouncerV="1.12.0"

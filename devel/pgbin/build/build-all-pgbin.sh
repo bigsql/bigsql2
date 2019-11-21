@@ -5,6 +5,7 @@ pgSrc=$SRC/postgresql
 binBld=/opt/pgbin-build/builds
 source ./versions.sh
 
+
 function runPgBin {
   ##echo "#"
   pOutDir=$1
@@ -17,10 +18,11 @@ function runPgBin {
   bncrSrc=$SRC/pgbouncer-$bouncerV.tar.gz
   odbcSrc=$SRC/psqlodbc-$odbcV.tar.gz
   bkrstSrc=$SRC/backrest-$backrestV.tar.gz
-
-  ./build-pgbin.sh -a $pOutDir -t $pPgSrc -n $pBldV
-  #./build-pgbin.sh -a $pOutDir -t $pPgSrc -n $pBldV -b $bncrSrc -o $odbcSrc
-  #./build-pgbin.sh -a $pOutDir -t $pPgSrc -n $pBldV -b $bncrSrc -o $odbcSrc -k $bkrstSrc
+ 
+  cmd="./build-pgbin.sh -a $pOutDir -t $pPgSrc -n $pBldV"
+  cmd="$cmd $optional"
+  ##echo "# $cmd"
+  $cmd
   if [[ $? -ne 0 ]]; then
     echo "Build Failed"
     exit 1	
@@ -50,6 +52,7 @@ else
   echo "ERROR: must supply pg version of 10, 11, 12 or all"
   exit 1
 fi
+optional="$2"
 
 shared_lib=/opt/pgbin-build/pgbin/shared/linux_64/lib/
 mkdir -p $shared_lib
@@ -75,7 +78,6 @@ cp /usr/lib64/libevent-2.0.so.5.1.9 $shared_lib/libevent-2.0.so.5
 cp /usr/local/lib/libgss.so.3       $shared_lib/.
 
 if [ "$majorV" == "all" ]; then
-  runPgBin "$binBld" "$pgSrc-$pg10V.tar.gz" "$pg10BuildV"
   runPgBin "$binBld" "$pgSrc-$pg11V.tar.gz" "$pg11BuildV"
   runPgBin "$binBld" "$pgSrc-$pg12V.tar.gz" "$pg12BuildV"
 else

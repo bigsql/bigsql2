@@ -48,10 +48,8 @@ Required Options:
         -t      PostgreSQL Source tar ball.
 
 Optional:
-        -b      Build pgBouncer support, provide pgBouncer source tar ball.
-        -o      Build psqlODBC support, provide psqlODBC source tar ball.
-	-k	Build pgBackrest support, provide pgBackrest source tar ball.
         -n      Build number, defaults to 1.
+	-c      Copy tarFile to \$IN/postgres/pgXX
         -h      Print Usage/help.
 
 ";
@@ -175,17 +173,15 @@ function buildPostgres {
 	cd $baseDir/$workDir/$pgSrcDir
 	mkdir -p $baseDir/$workDir/logs
 	buildLocation="$baseDir/$workDir/build/pg$pgShortV-$pgSrcV-$pgBldV-$OS"
-	echo "#    configure @ $buildLocation"
 
-	conf="./configure --prefix=$buildLocation" 
-	##conf="$conf --with-openssl --with-ldap --with-libxslt --with-libxml"
 	conf="$conf --with-openssl --with-libxslt --with-libxml --with-python --with-perl"
 	conf="$conf --disable-rpath"
 	##conf="$conf --with-uuid=ossp --with-gssapi --with-python --with-perl"
-	##conf="$conf --with-uuid=ossp --with-python --with-perl"
+	##conf="$conf --with-uuid=ossp --with-python --with-perl --with-ldap"
 	##conf="$conf --with-tcl --with-pam"
-	
-	configCmnd="$conf $pgLLVM"
+
+	echo "#  $conf"
+	configCmnd="./configure --prefix=$buildLocation $conf" 
 
 	export LD_LIBRARY_PATH=$sharedLibs
 	export LDFLAGS="-Wl,-rpath,'$sharedLibs' -L$sharedLibs"
@@ -198,7 +194,7 @@ function buildPostgres {
 		exit 1
 	fi
 
-	echo "#    make -j 5"
+	echo "#   make -j 5"
 	log=$baseDir/$workDir/logs/make.log
 	make -j 5 > $log 2>&1
 	if [[ $? -ne 0 ]]; then
@@ -206,7 +202,7 @@ function buildPostgres {
 		exit 1
 	fi
 
-	echo "#    make install"
+	echo "#   make install"
 	log=$baseDir/$workDir/logs/make_install.log
 	make install > $log 2>&1
 	if [[ $? -ne 0 ]]; then
@@ -215,7 +211,7 @@ function buildPostgres {
  	fi
 
 	cd $baseDir/$workDir/$pgSrcDir/contrib
-	echo "#    make -j 5 contrib"
+	echo "#   make -j 5 contrib"
 	make -j5 > $baseDir/$workDir/logs/contrib_make.log 2>&1
 	if [[ $? -eq 0 ]]; then
 		echo "#    make install contrib"
@@ -229,6 +225,7 @@ function buildPostgres {
 	PATH="$PATH:$buildLocation/bin"
 
 	cd $baseDir/$workDir/$pgSrcDir/doc
+	echo "#   make docs"
 	make > $baseDir/$workDir/logs/docs_make.log 2>&1
 	if [[ $? -eq 0 ]]; then
 		make install > $baseDir/$workDir/logs/docs_install.log 2>&1
@@ -368,23 +365,23 @@ function copySharedLibs {
 
 function updateSharedLibPaths {
         libPathLog=$baseDir/$workDir/logs/libPath.log
-	echo "# updateSharedLibPaths() @ $libPathLog"
+	echo "# updateSharedLibPaths()"
 
 	cd $buildLocation/bin
-	echo "## looping thru executables"
+	echo "#   looping thru executables"
 	for file in `dir -d *` ; do
 		##echo "### $file"
 		chrpath -r "\${ORIGIN}/../lib" "$file" >> $libPathLog 2>&1
 	done
 
 	cd $buildLocation/lib
-	echo "## looping thru shared objects"
+	echo "#   looping thru shared objects"
 	for file in `dir -d *so*` ; do
 		##echo "### $file"
 		chrpath -r "\${ORIGIN}/../lib" "$file" >> $libPathLog 2>&1 
 	done
 
-	echo "## looping thru lib/postgresql "
+	echo "#   looping thru lib/postgresql "
 	if [[ -d "$buildLocation/lib/postgresql" ]]; then	
 		cd $buildLocation/lib/postgresql
 		##echo "### $file"
@@ -401,10 +398,8 @@ function createBundle {
 
 	bldDir="$baseDir/$workDir/build"
 	cd $bldDir
-	echo "#    $bldDir"
 	Tar="pg$pgShortV-$pgSrcV-$pgBldV-$OS"
 	Cmd="tar -cjf $Tar.tar.bz2 $Tar pg$pgShortV-$pgSrcV-$pgBldV-$OS" 
-	echo "#    $Cmd"
 	tar_log=$baseDir/$workDir/logs/tar.log
         $Cmd >> $tar_log 2>&1
 	if [[ $? -ne 0 ]]; then
@@ -423,7 +418,13 @@ function createBundle {
 		tar -xf "$archiveDir/$workDir/$Tar.tar.bz2" --strip-components=1 -C $pgCompDir
 	fi
 	tarFile="$archiveDir/$workDir/$Tar.tar.bz2"
-	echo "#    tarFile=$tarFile"
+	if [ "$optional" == "-c" ]; then
+		cmd="cp -p $tarFile $IN/postgres/$pgShortV"
+		echo $cmd
+		$cmd
+	else
+		echo "#    tarFile=$tarFile"
+	fi
 	return 0
 }
 
@@ -478,7 +479,8 @@ fi
 
 echo "### $scriptName ###"
 
-while getopts "t:a:b:k:o:n:h" opt; do
+optional=""
+while getopts "t:a:b:k:o:n:hc" opt; do
 	case $opt in
 		t)
 			if [[ $OPTARG = -* ]]; then
@@ -497,46 +499,48 @@ while getopts "t:a:b:k:o:n:h" opt; do
 			archiveLocationPassed=1
 			echo "# -a $archiveDir"
 		;;
-		b) 	if [[ $OPTARG = -* ]]; then
-				((OPTIND--))
-				continue
-			fi
-			pgBouncerTar=$OPTARG
-			buildBouncer=1
-			echo "# -b $pgBouncerTar"
-		;;
-		k) 	if [[ $OPTARG = -* ]]; then
-				((OPTIND--))
-				continue
-			fi
-			backrestTar=$OPTARG
-			buildBackrest=1
-			echo "# -k $backrestTar"
-			##buildBackrest=0
-			##echo "# -k $backrestTar (IGNORING THIS FOR NOW)"
-		;;
-		o) 	if [[ OPTARG = -* ]]; then
-				((OPTIND--))
-				continue
-			fi
-			buildODBC=1
-			odbcSourceTar=$OPTARG
-			echo "# -o $odbcSourceTar"
-		;;
+		##b) 	if [[ $OPTARG = -* ]]; then
+		##		((OPTIND--))
+		##		continue
+		##	fi
+		##	pgBouncerTar=$OPTARG
+		##	buildBouncer=1
+		##	echo "# -b $pgBouncerTar"
+		##;;
+		##k) 	if [[ $OPTARG = -* ]]; then
+		##		((OPTIND--))
+		##		continue
+		##	fi
+		##	backrestTar=$OPTARG
+		##	buildBackrest=1
+		##	echo "# -k $backrestTar"
+		##	##buildBackrest=0
+		##	##echo "# -k $backrestTar (IGNORING THIS FOR NOW)"
+		##;;
+		##o) 	if [[ OPTARG = -* ]]; then
+		##		((OPTIND--))
+		##		continue
+		##	fi
+		##	buildODBC=1
+		##	odbcSourceTar=$OPTARG
+		##	echo "# -o $odbcSourceTar"
+		##;;
 		n)	
 			pgBldV=$OPTARG
 			echo "# -n $pgBldV"
+		;;
+		c)
+			optional="-c"
 		;;
 		h)
 			printUsage
 			exit 0
 		;;
-		\?)
-			printUsage
-			echo "Invalid Option Specified, exiting ...." 
-			exit 1
 		esac
 done
+if [ ! "$optional" == "" ]; then
+	echo "# $optional"
+fi
 echo "###"
 
 isPassed "$archiveLocationPassed" "Target build location (-a)"
@@ -545,26 +549,26 @@ isPassed "$sourceTarPassed" "Postgres source tarball (-t)"
 checkCmd "checkPostgres"
 checkCmd "buildPostgres"
 
-if [ "$buildBouncer" == "1" ]; then
-  buildApp "checkBouncer" "buildBouncer"
-fi
+##if [ "$buildBouncer" == "1" ]; then
+##  buildApp "checkBouncer" "buildBouncer"
+##fi
 
-if [ "$buildODBC" == "1" ]; then
-  buildApp "checkODBC" "buildODBC"
-fi
+##if [ "$buildODBC" == "1" ]; then
+##  buildApp "checkODBC" "buildODBC"
+##fi
 
-if [ "$buildBackrest" == "1" ]; then
-  buildApp "checkBackrest" "buildBackrest"
-fi
+##if [ "$buildBackrest" == "1" ]; then
+##  buildApp "checkBackrest" "buildBackrest"
+##fi
 
 checkCmd "copySharedLibs"
 checkCmd "updateSharedLibPaths"
 checkCmd "createBundle"
 rc=$?
 echo "# rc=$rc"
-
-endTime=`date +%Y-%m-%d_%H:%M:%S`
-echo "### end at $endTime"
 echo "#"
+
+##endTime=`date +%Y-%m-%d_%H:%M:%S`
+##echo "### end at $endTime"
 
 exit 0

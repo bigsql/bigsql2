@@ -45,6 +45,7 @@ function getPGVersion {
 
 function prepComponentBuildDir {
 	buildLocation=$1
+	rm -rf $buildLocation
 	mkdir -p $buildLocation
 	mkdir -p $buildLocation/bin
         mkdir -p $buildLocation/share
@@ -92,12 +93,18 @@ function cleanUpComponentDir {
 }
 
 function  packageComponent {
-	echo "$targetDir/$workDir/$componentBundle.tar.bz2"
+	bundle="$targetDir/$workDir/$componentBundle.tar.bz2"
+	echo "$bundle"
 
 	cd "$baseDir/$workDir/build/"
 	tar -cjf "$componentBundle.tar.bz2" $componentBundle
+	rm -rf "$targetDir/$workDir"
 	mkdir -p "$targetDir/$workDir"
 	mv "$componentBundle.tar.bz2" "$targetDir/$workDir/"
+
+	if [ "$copyBin" == "true" ]; then
+		cp -pv $bundle $IN/postgres/$copyTo
+	fi
 
 }
 
@@ -423,6 +430,7 @@ function buildComp {
         ##echo "#      compNm: $componentName"
         mkdir -p "$baseDir/$workDir/logs"
         cd "$baseDir/$workDir"
+	rm -rf $comp
         mkdir $comp  && tar -xf $src --strip-components=1 -C $comp
         cd $comp
 
@@ -968,7 +976,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
+TEMP=`getopt -l copy-bin,with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -976,7 +984,7 @@ if [ $? != 0 ] ; then
 fi
 
 #eval set -- "$TEMP"
-
+copyBin=false
 while true; do
   case "$1" in
     --with-pgbin ) pgBinPassed=true; pgBin=$2; shift; shift; ;;
@@ -1017,6 +1025,7 @@ while true; do
     --build-anon ) buildAnon=true; Source=$2; shift; shift ;;
     --build-ddlx ) buildDdlx=true; Source=$2; shift; shift ;;
     --build-number ) buildNumber=$2; shift; shift ;;
+    --copy-bin ) copyBin=true; copyTo=$2; shift; shift; ;;
     -- ) shift; break ;;
     -* ) echo "Invalid Option Passed"; exit 1; ;;
     * ) break ;;
