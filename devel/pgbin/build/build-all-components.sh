@@ -3,15 +3,21 @@ source versions.sh
 
 
 function build {
-  bin11="--with-pgbin /opt/pgcomponent/pg11"
+  pgbin="--with-pgbin /opt/pgcomponent/pg$pgV"
   echo ""
   echo "###################################"
-  ./build-component.sh --build-$1 $SRC/$1-$2.tar.gz $bin11 $3
+  ./build-component.sh --build-$1 $SRC/$1-$2.tar.gz $pgbin $3
   rc=$?
 }
 
 
 ################### MAINLINE #####################
+
+pgV="$2"
+if [ ! "$pgV"  == "11" ] && [ ! "$pgV"  == "12" ]; then
+  echo  "ERROR: second parm must be 11 or 12"
+  exit 1
+fi
 
 if [ "$1" == "hypopg" ] || [ "$1" == "all" ]; then
   build hypopg $hypopgFullV $2 hypopg
