@@ -131,5 +131,5 @@ INSERT INTO versions VALUES ('athena_fdw-pg11', '3.1-2',      'linux64', 1, '201
 
 INSERT INTO versions VALUES ('salt',    '2019pp', 'linux64', 0, '20190912', '');
 INSERT INTO versions VALUES ('omnidb',  '2.16-1', 'linux64', 0, '20191112', '');
-INSERT INTO versions VALUES ('patroni', '1.6.1',  '',        1, '20191118', '');
+INSERT INTO versions VALUES ('patroni', '1.6.1',  '',        0, '20191118', '');
 

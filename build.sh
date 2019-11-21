@@ -36,7 +36,8 @@ printUsageMessage () {
   echo "# -B pip-$pipV  salt-$saltV"
   echo "# -b hub-$hubV"
   echo "#--------------------------------------------------------#"
-  echo "# ./build.sh -X l64 -c $bundle -N $P11 -p 11 -Bb"
+  echo "# ./build.sh -X l64 -c $bundle -N $P11 -p 11 -b"
+  echo "# ./build.sh -X l64 -c $bundle -N $P12 -p 12 -b"
   echo "#---------------------------------------------------#"
 }
 
