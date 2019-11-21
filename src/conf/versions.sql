@@ -106,10 +106,11 @@ INSERT INTO versions VALUES ('hub', '5.0.1', '', 0, '20191112', '');
 
 INSERT INTO versions VALUES ('pg10', '10.11-1',               'linux64, arm64', 0, '20191114', '');
 
-INSERT INTO versions VALUES ('pg11', '11.6-3',                'linux64, arm64', 0, '20191121', '');
-INSERT INTO versions VALUES ('pg11', '11.6-1',                'linux64, arm64', 1, '20191114', '');
+INSERT INTO versions VALUES ('pg11', '11.6-3',                'linux64, arm64', 1, '20191121', '');
+INSERT INTO versions VALUES ('pg11', '11.6-1',                'linux64, arm64', 0, '20191114', '');
 
-INSERT INTO versions VALUES ('pg12', '12.1-1',                'linux64, arm64', 1, '20191114', '');
+INSERT INTO versions VALUES ('pg12', '12.1-3',                'linux64, arm64', 1, '20191121', '');
+INSERT INTO versions VALUES ('pg12', '12.1-1',                'linux64, arm64', 0, '20191114', '');
 
 INSERT INTO versions VALUES ('hypopg-pg11', '1.1.3-1',        'linux64, arm64', 1, '20191119', 'pg11');
 
