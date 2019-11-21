@@ -59,7 +59,7 @@ elif [ "$1" == "11" ]; then
 elif [ "$1" == "12" ]; then
   downBuild $v12
 else
-  echo "ERROR: Incorrect PG version.  Must be 9.6 thru 12"
+  echo "ERROR: Incorrect PG version.  Must be 10 thru 12"
   exit 1
 fi
  

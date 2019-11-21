@@ -17,4 +17,4 @@ cp -v /usr/lib64/libuuid*     $shared_lib/.
 cp -v /usr/lib64/libxml2*     $shared_lib/.
 cp -v /usr/lib64/libevent*    $shared_lib/.
 
-rm $shared_lib/*.a
+rm -f $shared_lib/*.a
