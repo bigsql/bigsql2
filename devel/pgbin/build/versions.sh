@@ -44,7 +44,7 @@ orafceFullVersion=3.8.0
 orafceShortVersion=
 orafceBuildV=1
 
-oFDWFullVersion=2.1.0
+oFDWFullVersion=2.2.0
 oFDWShortVersion=
 oFDWBuildV=1
 

@@ -27,6 +27,14 @@ if [ ! "$pgV"  == "11" ] && [ ! "$pgV"  == "12" ]; then
   exit 1
 fi
 
+if [ "$1" == "oraclefdw" ] || [ "$1" == "all" ]; then
+  build oraclefdw $oFDWFullVersion $2 oraclefdw 
+fi
+
+if [ "$1" == "orafce" ] || [ "$1" == "all" ]; then
+  build orafce $orafceFullVersion $2 orafce
+fi
+
 if [ "$1" == "hypopg" ] || [ "$1" == "all" ]; then
   build hypopg $hypopgFullV $2 hypopg
 fi

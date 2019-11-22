@@ -292,11 +292,11 @@ function buildTSQLComponent {
 
 function buildOracleFDWComponent {
 
-	componentName="oracle_fdw$oFDWShortVersion-pg$pgShortVersion-$oFDWFullVersion-$oFDWBuildV-$buildOS"
+	componentName="oraclefdw$oFDWShortVersion-pg$pgShortVersion-$oFDWFullVersion-$oFDWBuildV-$buildOS"
 	mkdir -p "$baseDir/$workDir/logs"
 	cd "$baseDir/$workDir"
-	mkdir oracle_fdw && tar -xf $oracleFDWSource --strip-components=1 -C oracle_fdw
-	cd oracle_fdw
+	mkdir oraclefdw && tar -xf $oracleFDWSource --strip-components=1 -C oraclefdw
+	cd oraclefdw
 
 	buildLocation="$baseDir/$workDir/build/$componentName"
 
@@ -441,11 +441,11 @@ function buildComp {
 
         PATH=$buildLocation/bin:$PATH
         log_dir="$baseDir/$workDir/logs"
-        ##echo "#     log_dir: $log_dir"
+        echo "#     log_dir: $log_dir"
         make_log="$log_dir/$comp-make.log"
-        ##echo "#    make_log: $make_log"
+        echo "#    make_log: $make_log"
         install_log="$log_dir/$comp-install.log"
-        ##echo "# install_log: $install_log"
+        echo "# install_log: $install_log"
 
         if [ "$comp" == "athena_fdw" ]; then
            buildLib=$buildLocation/lib
@@ -976,7 +976,7 @@ function buildTimeScaleDBComponent {
         packageComponent $componentBundle
 }
 
-TEMP=`getopt -l copy-bin,no-copy-bin,with-pgver:,with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oracle-fdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
+TEMP=`getopt -l copy-bin,no-copy-bin,with-pgver:,with-pgbin:,build-hypopg:,build-postgis:,build-pgbouncer:,build-athena-fdw:,build-cassandra-fdw:,build-pgtsql:,build-tds-fdw:,build-mongo-fdw:,build-mysql-fdw:,build-oraclefdw:,build-orafce:,build-pgaudit:,build-set-user:,build-pgpartman:,build-pldebugger:,build-plr:,build-pljava:,build-plv8:,build-plprofiler:,build-background:,build-bulkload:,build-cstore-fdw:,build-parquet-fdw:,build-pgrepack:,build-pglogical:,build-pgspock:,build-hintplan:,build-timescaledb:,build-pgagent:,build-cron:,build-pgmp:,build-fixeddecimal:,build-anon,build-ddlx:,build-number: -- "$@"`
 
 if [ $? != 0 ] ; then
 	echo "Required parameters missing, Terminating..."
@@ -1002,7 +1002,7 @@ while true; do
     --build-tds-fdw ) buildTDSFDW=true; tdsFDWSource=$2; shift; shift ;;
     --build-mongo-fdw ) buildMongoFDW=true mongoFDWSource=$2; shift; shift ;;
     --build-mysql-fdw ) buildMySQLFDW=true; mysqlFDWSource=$2; shift; shift ;;
-    --build-oracle-fdw ) buildOracleFDW=true; oracleFDWSource=$2; shift; shift ;;
+    --build-oraclefdw ) buildOracleFDW=true; Source=$2; shift; shift ;;
     --build-orafce ) buildOrafce=true; orafceSource=$2; shift; shift ;;
     --build-pgaudit ) buildPGAudit=true; pgAuditSource=$2; shift; shift ;;
     --build-set-user ) buildSetUser=true; setUserSource=$2; shift; shift ;;
@@ -1068,7 +1068,8 @@ if [[ $buildTDSFDW == "true" ]]; then
 fi
 
 if [[ $buildOracleFDW == "true" ]]; then
-	buildOracleFDWComponent
+	buildComp oraclefdw "$oFDWShortVersion" "$oFDWFullVersion" "$oFDWBuildV" "$Source"
+	# buildOracleFDWComponent
 fi
 
 if [[ $buildPGAudit == "true" ]]; then
