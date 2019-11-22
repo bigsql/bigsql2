@@ -103,7 +103,7 @@ function  packageComponent {
 	mv "$componentBundle.tar.bz2" "$targetDir/$workDir/"
 
 	if [ "$copyBin" == "true" ]; then
-		cp -pv $bundle $IN/postgres/$compDir/$copyTo
+		cp -pv $bundle $IN/postgres/$compDir/.
 	fi
 
 }
@@ -1030,8 +1030,8 @@ while true; do
     --build-anon ) buildAnon=true; Source=$2; shift; shift ;;
     --build-ddlx ) buildDdlx=true; Source=$2; shift; shift ;;
     --build-number ) buildNumber=$2; shift; shift ;;
-    --copy-bin ) copyBin=true; copyTo=$2; shift; shift; ;;
-    --no-copy-bin ) copyBin=false; copyTo=$2; shift; shift; ;;
+    --copy-bin ) copyBin=true; shift; shift; ;;
+    --no-copy-bin ) copyBin=false; shift; shift; ;;
     -- ) shift; break ;;
     -* ) echo "Invalid Option Passed"; exit 1; ;;
     * ) break ;;
