@@ -2,6 +2,7 @@
 if [ "$1" == "12" ]; then
   source bp.sh
   ./apg install pg12; ./apg start pg12 -y -d demo; ./apg status
+  ./apg install plprofiler-pg12 -d demo; ./apg status
 
 elif [ "$1" == "11" ]; then
   source bp.sh
