@@ -1,3 +1,4 @@
+v96=9.6.16
 v10=10.11
 v11=11.6
 v12=12.1
@@ -42,7 +43,7 @@ downBuild () {
   echoCmd "mv postgresql-$1 $1"
   echoCmd "rm postgresql-$1.tar.gz"
   echoCmd "cd $1"
-  echoCmd "./configure --prefix=$PWD --with-openssl --with-llvm"
+  echoCmd "./configure --prefix=$PWD --with-openssl $options"
   echoCmd "make -j5"
   echoCmd "make install"
   echoCmd "cd .."
@@ -52,14 +53,20 @@ downBuild () {
 #################################################################################
 ##                        MAINLINE
 #################################################################################
-if [ "$1" == "10" ]; then
+if [ "$1" == "96" ]; then
+  options=""
+  downBuild $v96
+elif [ "$1" == "10" ]; then
+  options=""
   downBuild $v10
 elif [ "$1" == "11" ]; then
+  options="--with-llvm"
   downBuild $v11
 elif [ "$1" == "12" ]; then
+  options="--with-llvm"
   downBuild $v12
 else
-  echo "ERROR: Incorrect PG version.  Must be 10 thru 12"
+  echo "ERROR: Incorrect PG version.  Must be 96, 10, 11 or 12"
   exit 1
 fi
  
