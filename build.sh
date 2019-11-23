@@ -290,8 +290,6 @@ finalizeOutput () {
     checkCmd "mkdir hub/scripts"
   fi
   checkCmd "cp -r $CLI/* hub/scripts/."
-  checkCmd "cp -r $CLI/../doc hub/."
-  checkCmd "cp $CLI/../README.md  hub/doc/."
   checkCmd "rm -f hub/scripts/*.pyc"
   zipDir "hub" "$hubV" "" "Enabled"
 
@@ -393,24 +391,8 @@ initPG () {
   writeSettRow "GLOBAL" "STAGE" "prod"
   writeSettRow "GLOBAL" "AUTOSTART" "off"
 
-  initC "patroni" "patroni" "$patroniV"  "" "postgres/patroni" "" "" "nil"
-
-  if [ "$pgM" == "12" ]; then 
-    initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$outPlat" "postgres/profiler" "" "" "nil"
-  fi
-
   if [ "$pgM" == "11" ]; then 
-    initC "hypopg-pg$pgM" "hypopg" "$hypoV" "$outPlat" "postgres/hypopg" "" "" "nil"
-    initC "pglogical-pg$pgM" "pglogical" "$logicalV" "$outPlat" "postgres/logical" "" "" "nil"
-    initC "timescaledb-pg$pgM" "timescaledb" "$timescaleV"  "$outPlat" "postgres/timescale" "" "" "nil"
     initC "plprofiler-pg$pgM" "plprofiler" "$profV" "$outPlat" "postgres/profiler" "" "" "nil"
-    initC "pgtsql-pg$pgM" "pgtsql" "$tsqlV" "$outPlat" "postgres/tsql" "" "" "nil"
-    initC "ddlx-pg$pgM" "ddlx" "$ddlxV" "$outPlat" "postgres/ddlx" "" "" "nil"
-    initC "anon-pg$pgM" "anon" "$anonV" "$outPlat" "postgres/anon" "" "" "nil"
-
-    ##initC "pgspock-pg$pgM" "pgspock" "$spockV" "$plat" "postgres/spock" "" "" "nil"
-    ##initC "athena_fdw-pg$pgM" "athena_fdw" "$athenafdwV" "$plat" "postgres/athenafdw" "" "" "nil"
-    ##initC "cassandra_fdw-pg$pgM" "cassandra_fdw" "$cstarV" "$plat" "postgres/cstar" "" "" "nil"
   fi
 }
 
