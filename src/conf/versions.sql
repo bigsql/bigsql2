@@ -64,6 +64,7 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
+INSERT INTO versions VALUES ('hub', '5.0.5', '', 1, '20191201', '');
 INSERT INTO versions VALUES ('hub', '5.0.4', '', 1, '20191126', '');
 INSERT INTO versions VALUES ('hub', '5.0.3', '', 0, '20191114', '');
 
