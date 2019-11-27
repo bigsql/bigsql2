@@ -290,6 +290,8 @@ finalizeOutput () {
     checkCmd "mkdir hub/scripts"
   fi
   checkCmd "cp -r $CLI/* hub/scripts/."
+  checkCmd "cp -r $CLI/../doc hub/."
+  checkCmd "cp $CLI/../README.md  hub/doc/."
   checkCmd "rm -f hub/scripts/*.pyc"
   zipDir "hub" "$hubV" "" "Enabled"
 
