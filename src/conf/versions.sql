@@ -64,13 +64,13 @@ CREATE TABLE versions (
   FOREIGN KEY (component) REFERENCES releases(component)
 );
 
-INSERT INTO versions VALUES ('hub', '5.0.5', '', 1, '20191201', '');
-INSERT INTO versions VALUES ('hub', '5.0.4', '', 1, '20191126', '');
+INSERT INTO versions VALUES ('hub', '5.0.5', '', 1, '20191127', '');
+INSERT INTO versions VALUES ('hub', '5.0.4', '', 0, '20191126', '');
 INSERT INTO versions VALUES ('hub', '5.0.3', '', 0, '20191114', '');
 
-INSERT INTO versions VALUES ('pg11', '11.6-1',                'linux64', 1, '20191111', '');
+INSERT INTO versions VALUES ('pg11', '11.6-1',                'linux64', 1, '20191114', '');
 
-INSERT INTO versions VALUES ('pg12', '12.1-1',                'linux64', 1, '20191111', '');
+INSERT INTO versions VALUES ('pg12', '12.1-1',                'linux64', 1, '20191114', '');
 
-INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1',      'linux64', 1, '20191111', 'pg11');
+INSERT INTO versions VALUES ('plprofiler-pg11', '4.1-1',      'linux64', 1, '20191114', 'pg11');
 
